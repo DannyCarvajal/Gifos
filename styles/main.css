@@ -520,7 +520,7 @@ nav > ul > li > a > img.creatugifo:hover {
   color: var(--negro);
 }
 
-@media (min-width: 401px) and (max-width: 1200px) {
+@media (min-width: 501px) and (max-width: 1200px) {
   .mobiledivmax {
     left: 20vw;
     right: 25vw;
@@ -534,7 +534,7 @@ nav > ul > li > a > img.creatugifo:hover {
   }
 }
 
-@media (min-width: 200px) and (max-width: 400px) {
+@media (min-width: 200px) and (max-width: 600px) {
   .mobiledivmax {
     all: unset;
     position: fixed;
@@ -551,19 +551,16 @@ nav > ul > li > a > img.creatugifo:hover {
   }
   .mobilecreatormax {
     bottom: unset;
-    top: 56%;
+    top: 62%;
     width: 100%;
     left: 10%;
   }
   .mobiletitlemax {
     bottom: unset;
-    top: 59%;
+    top: 65%;
     width: 100%;
     left: 10%;
   }
-}
-
-@media (min-width: 200px) and (max-width: 600px) {
   .seccion2-main .titulo-seccion2 > p {
     max-width: 80vw;
   }
@@ -575,7 +572,6 @@ nav > ul > li > a > img.creatugifo:hover {
     display: none;
   }
   .seccion2-main .carrousel .cards {
-    gap: 10px;
     max-width: 95vw;
     overflow-x: scroll;
   }

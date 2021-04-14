@@ -59,8 +59,6 @@ function translatex() {
         contadorslider++
         contadorsliderreverse--
 
-        console.log('left is at ' + contadorsliderreverse)
-        console.log('right is at ' + contadorslider)
     }
 
 
@@ -86,8 +84,6 @@ function translatexreverse() {
         contadorsliderreverse++
         contadorslider--
 
-        console.log('left is at ' + contadorsliderreverse)
-        console.log('right is at ' + contadorslider)
     }
 
 
