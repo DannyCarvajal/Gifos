@@ -1,0 +1,29 @@
+:root{
+    --purple: #572EE5;
+    --purplewhite:#572EE5;
+    --background:white;
+    --negro: black;
+    --bgseccion2: #F3F5F8;
+
+}
+$celeste: #50e3c2;
+$montserrat: 'Montserrat', sans-serif;
+$roboto:'Roboto', sans-serif;
+
+
+body.dark-mode{
+    --purple: black;
+    --purplewhite:white;
+    --background:#37383C;
+    --negro:white;
+    --bgseccion2: rgb(34, 35, 39);
+
+}
+
+
+@mixin flex($justify:center,$align:center,$direction:row){
+    display: flex;
+    justify-content:$justify;
+    align-items:$align;
+    flex-direction:$direction;
+}

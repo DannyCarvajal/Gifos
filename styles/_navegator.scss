@@ -1,0 +1,222 @@
+body{
+    background-color: var(--background);
+    transition: 0.7s;
+    position: relative;
+}
+
+.maxbackground{
+    position: absolute;
+    height: 100%;
+    z-index: 50;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: var(--background);
+    opacity: 0.98;
+    // pointer-events: none;
+    display: none;
+}
+
+.purpleLine{
+    height: 5px;
+    background-color: var(--purple);
+    transition: 0.7s;
+    z-index: 30;
+}
+
+
+
+nav{
+
+    z-index: 300;
+    @include flex(space-between);
+    height: 90px;
+
+
+    &>.logo{
+        margin-left:10.83333333333333vw;
+        cursor: pointer;
+        transition: 0.7s;
+        width:100px;
+        height: 100px;
+        position: relative;
+        top: 5px;
+        z-index: 300;
+    }
+
+    &>ul{
+        list-style: none;
+        @include flex(space-between);
+        margin-right: 10.83333333333333vw;
+        color: var(--purple);
+        text-align: center;
+
+        &:last-child{
+            gap: 3.472222222222222vw;
+        }
+
+        &>.item2,&>.item3{
+            position: relative;
+            right: 0.6944444444444444vw;
+        }
+
+        &>.nav-items{
+        cursor: pointer;
+        font:bold 13px/16px $montserrat;
+        transition: 0.4s;
+
+            &:hover{
+                text-decoration: underline;
+                text-decoration-color: $celeste;
+                text-decoration-thickness:2px ;
+                transform: scale(1.05);
+            }
+
+            &:active{
+                color: #9CAFC3;
+            }
+
+            &>a{
+                all: unset;
+            color: var(--purplewhite) ;
+                
+                &:hover{
+                    text-decoration: underline;
+                    text-decoration-color: $celeste;
+                    text-decoration-thickness:2px ;
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        /* POINTER FOR IMG  */
+        &>li>a>img.creatugifo{
+        cursor: pointer;
+        transition: 0.4s;
+
+        &:hover{
+        // transform: scale(1.1);
+        transform: rotate(90deg) scale(1.1);
+        }
+        
+        }
+    }
+
+}
+
+    /* HAMBURGUER */
+
+.hamburguer {
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    display: none;
+    z-index: 40;
+
+    &>span {
+        display: none;
+        background-color: var(--purplewhite);
+        width: 100%;
+        height: 3px;
+        z-index: 10;
+        border-radius: 4px;
+        margin-top: 5px;
+    }
+}
+
+    .navbg{
+        transform: translateX(-100%);
+        position: fixed;
+        top: 20px;
+        height: 120px;
+        right: 0;
+        left: 0;
+        opacity: 0.9;
+        background-color: var(--background);
+        z-index: 30;
+        display: none;
+    }
+
+    .responsive-nav{
+        transform: translateX(-100%);
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        opacity: 0.9;
+        background-color: var(--purple);
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+        
+        
+        &>ul{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 70px;
+            gap: 60px;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            
+            &>li>.item2,&>li>.item3,&>.responsive1{
+                color: white;
+                text-decoration: none;
+
+            }
+
+            &>.responsive1:hover,&>.responsive2>a:hover,&>.responsive3>a:hover{
+                color: #9CAFC3;
+            }
+
+        }
+
+}
+
+
+@media (min-width:200px)and (max-width:1200px) {
+
+        .nav-items{
+                display: none;
+            }
+
+        nav>.logo{
+            margin-left:22px;
+            cursor: pointer;
+            transition: 0.7s;
+            width:90px;
+            height: 90px;
+            position: relative;
+            top: 30px;
+        }
+
+        .hamburguer {
+            display: block;
+
+            &>span{
+                display: block;
+            }
+        }
+
+        .responsive-nav{
+            display: flex;
+        }
+
+        .navbg{
+            display: block;
+        }
+
+}

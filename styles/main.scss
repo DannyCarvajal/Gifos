@@ -1,0 +1,22 @@
+@import 'variables';
+@import 'navegator';
+@import 'cards';
+@import 'sec2main';
+@import 'sec1main';
+@import 'creatugifo';
+@import 'footer';
+
+/*---GENERAL---*/
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    font-family: 'Montserrat', sans-serif;
+    // font-family: 'Roboto', sans-serif;
+    // overflow-y: hidden;
+    overflow-x: hidden;
+    font-display: fallback;
+}

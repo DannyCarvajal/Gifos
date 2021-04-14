@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover new and interesting gifs trendings and make your own one">
+    <link rel="icon" type="img/svg" href="Assets/GIFOSLOGO.svg">
+    <link rel="stylesheet" href="styles/main.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="javascript/general.min.js"></script>
+    <script src="javascript/createcards.min.js" async></script>
+    <script src="javascript/styles.min.js" async></script>
+    <script src="javascript/favorites.min.js" async></script>
+    <script src="javascript/carrousel.min.js" defer></script>
+    <title>Gifos</title>
+
+</head>
+<body class="darkmode" id="favoritos">
+    
+    
+    <!-- GENERAL OVERALL MAX CARDS -->
+    <div class="maxbackground"></div>
+
+    <!-- NAVEGATOR -->    
+    <div class="purpleLine purpleLine-inicial"></div>
+    <div class="navcontainer"></div>
+
+    <!-- SECCION 1 -->
+    <section class="seccion1-main">
+
+    <div class="containerfavabroad">
+
+        <div class="favgifs"></div>
+
+        <img src="Assets/icon-favoritos.svg" alt="Icon favoritos" class="favabroad">  
+        <h3 class="titulo h3favabroad">Favoritos</h3>
+        <div class="cardfavcontainer"></div>
+        <img src="Assets/icon-fav-sin-contenido.svg" alt="Favoritos sin contenido" class="favsincontenidoabroad">
+        <p class="pfav">"¡Guarda tu primer GIFO en Favoritos <br>
+            para que se muestre aquí!"</p>
+
+    </div>
+
+    </section>
+
+
+    <!-- SECCION 2 -->
+    <section class="seccion2-main">
+
+        <div class="titulo titulo-seccion2">
+            <h3>Trending GIFOS</h3>
+            <p class="tituloespecial">Mira los últimos GIFO de nuestra comunidad</p>
+        </div>
+
+        <!-- CARROUSEL -->
+        <div class="carrousel">
+        
+            <div class="firstarrow">
+                <img src="Assets/button-slider-left.svg" alt="Flecha Izquierda" class="flecha flechaIzquierda">
+            </div>
+            
+            <div class="cards-container" style="position: relative;">
+                <div class="cards">
+
+                </div>
+            </div>
+
+            <div class="lastarrow">
+                <img src="Assets/Button-Slider-right.svg" alt="Flecha Derecha" class="flecha flechaDerecha">
+            </div>
+            
+        </div>
+
+    </section>
+    <!-- FOOTER -->
+
+    <div class="footercontainer"></div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+
+/* CREATUGIFO HTML */
+
+.camaratugifo{
+    position: absolute;
+    top: 213px;
+    right: 73vw;
+    display: flex;
+}
+
+.pelicula{
+    position: absolute;
+    top: 510px;
+    left: 78vw;
+}
+
+.luzcamara{
+    position: relative;
+    top: 2.4px;
+}
+
+
+
+.createyourgif{
+    position: relative;
+    margin-top: 29px;
+    width: 48vw;
+    height: 390px;
+    border: 1px solid var(--purple);
+    @include flex($direction:column);
+
+    &>h1{
+        font: 700 30px/35px $montserrat;
+        text-align: center;
+        z-index: 30;
+    }
+
+    &>p{
+        text-align: center;
+        margin-top: 4px;
+        font: 400 16px/29px $roboto;
+        color: var(--negro);
+        z-index: 30;
+    }
+}
+
+.buttonsteps{
+    display: flex;
+    gap: 26px;
+    margin: 25px 0px 25px 0px;
+
+}
+    
+.lineaseparadora{
+    background-color: var(--purplewhite);
+    width: 55.3vw;
+    height: 5px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+
+}
+
+
+.comenzar{
+    cursor: pointer;
+    width: 127px;
+    height: 50px;
+    border: 1px solid var(--purplewhite);
+    border-radius: 25px ;
+    z-index: 20;
+    @include flex();
+
+    &.showme{
+        display: none;
+    }
+
+    &:hover{
+        background-color: var(--purplewhite);
+
+        &>h1{
+            color: var(--bgseccion2);
+        }
+    }
+
+    
+    &>h1{
+        cursor: pointer;
+        color: var(--purplewhite);
+        font: 700 13px/0px $montserrat;
+        text-align: center;
+    }
+}
+
+
+.corner{
+    width: 27px;
+    height: 25px;
+    border: 2.5px solid $celeste;
+    position: absolute;
+}
+
+/* 24 20 19 21 */
+/* 213 156 281 */
+
+.corner1{
+    top: 24px;
+    left: 20px;
+    border-right: transparent;
+    border-bottom: transparent;
+}
+
+.corner2{
+    top: 24px;
+    right: 20px;
+    border-left: transparent;
+    border-bottom: transparent;
+}
+
+.corner3{
+    bottom: 19px;
+    left: 21px;
+    border-right: transparent;
+    border-top: transparent;
+}
+
+.corner4{
+    bottom: 19px;
+    right: 21px;
+    border-left: transparent;
+    border-top: transparent;
+}
+
+.preloader {
+    display: none;
+    position: absolute;
+    right: 26%;
+    top: 85%;
+    width: 15px;
+    height: 15px;
+    border: 10px solid #eee;
+    border-top: 10px solid #50e3c2;
+    border-radius: 50%;
+    animation: round 2s infinite linear ;
+    }
+    @keyframes round {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+    }

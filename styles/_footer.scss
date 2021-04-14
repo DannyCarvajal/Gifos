@@ -1,0 +1,54 @@
+
+footer{
+    width: 98.9vw;
+    height: 116px;
+    color: var(--negro);
+
+    @include flex($justify:space-between);
+
+    &>.redesSociales{
+        @include flex();
+        gap: 19px;
+        margin-left: 8.125vw;
+
+        &>.twitter,&>.instagram{
+            position: relative;
+            left:0.39vw;
+        }
+
+        &>img:hover{
+            cursor: pointer;
+        }
+    }
+
+    &>.derechos{
+        margin-right: 8.125vw;
+    }
+
+    
+}
+
+
+
+@media (min-width:200px) and (max-width:600px) {
+
+    
+footer{
+    width: 100%;
+    height: 190px;
+
+    @include flex($direction:column);
+    gap: 47px;
+
+    &>.redesSociales{
+        gap: 24px;
+        margin-left: unset;
+    }
+
+    &>.derechos{
+        margin-right: unset;
+    }
+
+    
+}
+}
