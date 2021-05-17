@@ -160,8 +160,8 @@ if (creatugifoxd === false) {
     iconchange(leftarrow, 'mouseover', "Assets/button-slider-left-hover.svg");
     iconchange(leftarrow, 'mouseout', "Assets/button-slider-left.svg");
 
-    iconchange(rightarrow, 'mouseover', "Assets/button-Slider-right-hover.svg");
-    iconchange(rightarrow, 'mouseout', "Assets/button-Slider-right.svg");
+    iconchange(rightarrow, 'mouseover', "Assets/Button-Slider-right-hover.svg");
+    iconchange(rightarrow, 'mouseout', "Assets/Button-Slider-right.svg");
 
 
     let creatugifo = document.getElementsByClassName('creatugifo')[0];

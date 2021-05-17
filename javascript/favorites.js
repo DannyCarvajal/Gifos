@@ -54,9 +54,6 @@ function favoritesstorage(urlfav) {
         localStorage.setItem('favorites', JSON.stringify(favlist))
     }
 
-
-
-
 }
 
 
