@@ -1,60 +1,47 @@
-
-
 // API Request either on enter or click
 let onEnter = document.getElementById('input')
-onEnter.addEventListener('keydown', enterValidator)
+let lupaapi = document.getElementsByClassName('lupa')[0]
+onEnter.addEventListener('keydown',enterValidator)
+lupaapi.addEventListener('click', sendApiRequest)
 
 function enterValidator(e) {
     if (e.key === 'Enter')
         sendApiRequest()
 };
 
-let lupaapi = document.getElementsByClassName('lupa')[0]
-lupaapi.addEventListener('click', sendApiRequest)
-
-
 /* General counter */
-var contadorclicks = 0
-
-function suggestioncardclear(){
-    
-    let lupaimgactive= document.getElementsByClassName('imglupaactive')
-    for (let i = 0; i < lupaimgactive.length; i++) {
-        lupaimgactive[i].addEventListener('click',()=>{
-            contadorapi=3
-        })
-        
-    }
-}
+let contadorclicks = 0
 
 function sendApiRequest() {
 
-    console.log('has mandado la api')
-    /* GENERAL CHANGES BEFORE FETCH */
+    /*----- GENERAL CHANGES BEFORE FETCH----- */
 
-    /* CLEAR TRENDIG TOPICS// FOR A LINE  */
-    let trendingtopicsclear = document.getElementsByClassName('trending-seccion1')[0]
-    trendingtopicsclear.innerHTML = ""
+    let searchTrending = document.getElementsByClassName('trending-seccion1')[0]
     let linea = document.createElement("div")
+    let container = document.getElementsByClassName('containerapiresult')[0]
+    
+    /* CHANGE SEARCH TITLE  */
+    searchTrending.innerHTML = ""
+    /* CREATE LINE STYLE ABOVE SEARCH */
     linea.setAttribute('style', 'width:23.5vw; height:0.1px; opacity: 0.5; background-color: #9CAFC3;')
-    trendingtopicsclear.appendChild(linea)
-
+    searchTrending.appendChild(linea)
+    
     /* CLEAN THE CONTAINER ON A NEW SEARCH  */
-    let container = document.getElementsByClassName('containerapiresult')[0];
     container.innerHTML = ""
+    
+    /*--------------- API REQUEST------------*/
 
-    /* SET URL FOR THE FETCH*/
-    var userInput = document.getElementById('input').value
-    var giphyApiURL = `https://api.giphy.com/v1/gifs/search?q=${userInput}
+    let userInput = document.getElementById('input').value
+    let giphyApiURL = `https://api.giphy.com/v1/gifs/search?q=${userInput}
         &rating=pg&api_key=${APIkey1}`
 
     /* HEADER OF THE CONTAINER WITH THE TITLE SEARCH */
-    let tituloapirequest = document.getElementsByClassName('tituloapirequest')[0];
-    tituloapirequest.innerHTML = userInput;
+    let titleApiRequest = document.getElementsByClassName('titleApiRequest')[0]
+    titleApiRequest.innerHTML = userInput;
 
     /* STYLES FOR THE CONTAINER*/
-    let resultadosseccion1 = document.getElementsByClassName('resultados-seccion1')[0]
-    resultadosseccion1.setAttribute('style', 'display:unset;display: flex;flex-direction: column;justify-content: center; align-items: center;')
+    let resultsContainer = document.getElementsByClassName('resultados-seccion1')[0]
+    resultsContainer.setAttribute('style', 'display:unset;display: flex;flex-direction: column;justify-content: center; align-items: center;')
 
     fetchapi(giphyApiURL)
 }
@@ -64,17 +51,17 @@ var Responselist = []
 async function fetchapi(giphyApiURL) {
 
     /* FETCH TO THE API */
-    var fetchreq = await fetch(giphyApiURL)
-    var requestres = await fetchreq.json()
+    let request = await fetch(giphyApiURL)
+    let apiResponse = await request.json()
     
     /* SEND TO THE API */
-    localStorage.setItem("cardssearch",JSON.stringify(requestres))
+    localStorage.setItem("cardssearch",JSON.stringify(apiResponse))
     /* OBTAIN    */
     // let resultinlocal= JSON.parse(localStorage.getItem("cardssearch"))
     // console.log(resultinlocal)
 
     // COPY THE OBJECT INTO ANOTHER VARIABLE
-    Responselist= JSON.parse(JSON.stringify(requestres))
+    Responselist= JSON.parse(JSON.stringify(apiResponse))
 
     /* PRINT FIRST ROW OF 12 CARDS */
     cardGif(Responselist, 'response', 2, 'tarjetaAPI')
@@ -113,3 +100,13 @@ function vermas(Responselist) {
 
 contadorclicks++
 
+// function suggestioncardclear(){
+    
+//     let lupaimgactive= document.getElementsByClassName('imglupaactive')
+//     for (let i = 0; i < lupaimgactive.length; i++) {
+//         lupaimgactive[i].addEventListener('click',()=>{
+//             contadorapi=3
+//         })
+        
+//     }
+// }

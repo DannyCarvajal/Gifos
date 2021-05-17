@@ -4,7 +4,12 @@ function cardGif(json, imageclass, number, divclass, aumento = 0, aumento2 = 12,
 
     for (let i = 0 + aumento; i < aumento2; i++) {
 
-        if (divclass == "favoritescard" || divclass == "misgifoscard") {
+        console.log('1')
+
+        if (divclass === "favoritescard" || divclass === "misgifoscard") {
+
+        console.log('2')
+
 
             if (json[i].includes('title')) {
                 var division1 = json[i].split("title")
@@ -14,47 +19,64 @@ function cardGif(json, imageclass, number, divclass, aumento = 0, aumento2 = 12,
                 var id = division2[1]
 
                 /* ID OF THE GIF */
-                var gifid = document.createElement("p")
-                gifid.className = "gifid"
-                gifid.setAttribute('style', 'display:none;')
-                gifid.innerText = id
+                // var gifid = document.createElement("p")
+                // gifid.className = "gifid"
+                // gifid.setAttribute('style', 'display:none;')
+                // gifid.innerText = id
             }
 
 
-            var card3 = document.createElement("img")
-            card3.setAttribute("src", "Assets/icon-trash-normal.svg")
-            card3.className = `card${number} card${number}-interaction3 trash`
+            // var card3 = document.createElement("img")
+            // card3.setAttribute("src", "Assets/icon-trash-normal.svg")
+            // card3.className = `card${number} card${number}-interaction3 trash`
 
-            var card4 = document.createElement("img")
-            card4.setAttribute('style', 'display:none;')
-            card4.setAttribute("src", "Assets/icon-fav-active.svg")
-            card4.className = `card${number} card${number}-interaction3-active`
+            // var card4 = document.createElement("img")
+            // card4.setAttribute('style', 'display:none;')
+            // card4.setAttribute("src", "Assets/icon-fav-active.svg")
+            // card4.className = `card${number} card${number}-interaction3-active`
 
-            /* FAVORITES OVERLAT REQUIRE AN EXTRA 8PX BOTTOM */
-            var overlay = document.createElement("div")
-            overlay.className = "overlay-colorselect8"
+            // /* FAVORITES OVERLAT REQUIRE AN EXTRA 8PX BOTTOM */
+            // var overlay = document.createElement("div")
+            // overlay.className = "overlay-colorselect8"
+
+
+            var card3src= "Assets/icon-trash-normal.svg"
+            var card3class= `card${number} card${number}-interaction3 trash`
+            var card4src= "Assets/icon-fav-active.svg"
+            var card4class= `card${number} card${number}-interaction3-active`
+            var overlayclass= "overlay-colorselect8"
 
         } else {
+
+            console.log('2')
+
             var imgPathtrending = json.data[i].images.downsized_medium.url
-            // var imgPathtrending = json.data[i].images.preview_webp.url
             var title = json.data[i].title
 
-            /* ID OF THE GIF */
-            var gifid = document.createElement("p")
-            gifid.className = "gifid"
-            gifid.setAttribute('style', 'display:none;')
-            gifid.innerText = json.data[i].id
+            // /* ID OF THE GIF */
+            // var gifid = document.createElement("p")
+            // gifid.className = "gifid"
+            // gifid.setAttribute('style', 'display:none;')
+            // gifid.innerText = json.data[i].id
 
-            var card3 = document.createElement("img")
-            card3.setAttribute("src", "Assets/icon-fav.svg")
-            card3.className = `card${number} card${number}-interaction3`
-
-            var card4 = document.createElement("img")
-            card4.setAttribute("src", "Assets/icon-fav-active.svg")
-            card4.className = `card${number} card${number}-interaction3-active`
-
-            var overlay = document.createElement("div")
-            overlay.className = "overlay-colorselect"
+            
+            // var card3 = document.createElement("img")
+            // card3.setAttribute("src", "Assets/icon-fav.svg")
+            // card3.className = `card${number} card${number}-interaction3`
+            
+            // var card4 = document.createElement("img")
+            // card4.setAttribute("src", "Assets/icon-fav-active.svg")
+            // card4.className = `card${number} card${number}-interaction3-active`
+            
+            // var overlay = document.createElement("div")
+            // overlay.className = "overlay-colorselect"
+            
+            var card3src= "Assets/icon-fav.svg"
+            var card3class= `card${number} card${number}-interaction3`
+            var card4src= "Assets/icon-fav-active.svg"
+            var card4class=  `card${number} card${number}-interaction3-active`
+            var overlayclass= "overlay-colorselect"
+            var id= json.data[i].id
         }
 
         /* DEFINIR TITULO Y CREADOR */
@@ -67,73 +89,98 @@ function cardGif(json, imageclass, number, divclass, aumento = 0, aumento2 = 12,
             var userfinal = " "
         }
 
-        /* CREATION OF CARDS */
-        var cardoptions = document.createElement("div")
-        cardoptions.className = `cardoptions cardoptionshover${number}`
 
-        /* ADD THE IMAGES TO THE CONTAINER */
-        var generaldiv = document.createElement("div")
-        generaldiv.className = divclass, `tarjeta${i}`
+        // /* ADD THE IMAGES TO THE CONTAINER */
+        // var generaldiv = document.createElement("div")
+        // generaldiv.className = divclass, `tarjeta${i}`
 
-        var card1 = document.createElement("img")
-        card1.setAttribute("src", "Assets/icon-max-normal.svg")
-        card1.className = `card${number} card${number}-interaction1`
+        // /* CREATION OF CARDS */
+        // var cardoptions = document.createElement("div")
+        // cardoptions.className = `cardoptions cardoptionshover${number}`
 
-        var card2 = document.createElement("img")
-        card2.setAttribute("src", "Assets/icon-download.svg")
-        card2.className = `card${number} card${number}-interaction2`
 
-        var cardtitle = document.createElement("div")
-        cardtitle.className = `card${number} card${number}-info`
+        // var card1 = document.createElement("img")
+        // card1.setAttribute("src", "Assets/icon-max-normal.svg")
+        // card1.className = `card${number} card${number}-interaction1`
 
-        var username = document.createElement("h4")
-        username.innerText = userfinal
+        // var card2 = document.createElement("img")
+        // card2.setAttribute("src", "Assets/icon-download.svg")
+        // card2.className = `card${number} card${number}-interaction2`
 
-        /* TITLE AND DESCRIPTION OF THE GIF */
-        var giftitle = document.createElement("p");
-        giftitle.className = "titlecurrentgif"
-        giftitle.innerText = titlefinal
+        // var cardtitle = document.createElement("div")
+        // cardtitle.className = `card${number} card${number}-info`
 
-        cardtitle.appendChild(username)
-        cardtitle.appendChild(giftitle)
+        // var username = document.createElement("h4")
+        // username.innerText = userfinal
 
-        /* APPEND INTO THE CARD CONTAINER */
-        cardoptions.appendChild(card1)
-        cardoptions.appendChild(card2)
-        cardoptions.appendChild(card3)
-        cardoptions.appendChild(card4)
-        cardoptions.appendChild(cardtitle)
-        cardoptions.appendChild(gifid)
-        cardoptions.appendChild(overlay)
+        // /* TITLE AND DESCRIPTION OF THE GIF */
+        // var giftitle = document.createElement("p");
+        // giftitle.className = "titlecurrentgif"
+        // giftitle.innerText = titlefinal
 
-        var trendingImage = document.createElement("img")
-        trendingImage.setAttribute("src", imgPathtrending)
-        trendingImage.setAttribute("alt", titlefinal)
-        trendingImage.className = imageclass
+        // cardtitle.appendChild(username)
+        // cardtitle.appendChild(giftitle)
 
-        /* APPEND EVERYTHING INTO THE GEN DIV */
-        generaldiv.appendChild(cardoptions)
-        generaldiv.appendChild(trendingImage)
+        // /* APPEND INTO THE CARD CONTAINER */
+        // cardoptions.appendChild(card1)
+        // cardoptions.appendChild(card2)
+        // cardoptions.appendChild(card3)
+        // cardoptions.appendChild(card4)
+        // cardoptions.appendChild(cardtitle)
+        // cardoptions.appendChild(gifid)
+        // cardoptions.appendChild(overlay)
+
+        // var trendingImage = document.createElement("img")
+        // trendingImage.setAttribute("src", imgPathtrending)
+        // trendingImage.setAttribute("alt", titlefinal)
+        // trendingImage.className = imageclass
+
+        // /* APPEND EVERYTHING INTO THE GEN DIV */
+        // generaldiv.appendChild(cardoptions)
+        // generaldiv.appendChild(trendingImage)
+
+        console.log('3')
+
+
+        let generaldiv= `
+            <div class= "${divclass} tarjeta${i}">
+                <div class="cardoptions cardoptionshover${number}">
+                    <img class="card${number} card${number}-interaction1" src="Assets/icon-max-normal.svg"> 
+                    <img class="card${number} card${number}-interaction2" src="Assets/icon-download.svg"> 
+                    <img class="${card3class}" src="${card3src}"> 
+                    <img class="${card4class}" src="${card4src}"> 
+                    <div class="card${number} card${number}-info"> 
+                        <h4>${userfinal}</h4>
+                        <div class="titlecurrentgif" >${titlefinal}</div>
+                    </div>
+                </div>
+                <img class="${imageclass}" src="${imgPathtrending}" alt="${titlefinal}"> 
+                <p class="gifid" style="display:none;"> ${id} </p>
+                <div class="${overlayclass}"> </div>
+            </div>
+        `
+
+        console.log(generaldiv);
 
 
         if (number == 1) {
 
             var cards = document.getElementsByClassName("cards")[0]
-            cards.appendChild(generaldiv)
+            cards.innerHTML+= generaldiv
 
         } else if (divclass == "favoritescard") {
 
             let container = document.getElementsByClassName('cardfavcontainer')[0]
-            container.appendChild(generaldiv)
+            container.innerHTML+= generaldiv
 
         } else if (divclass == "misgifoscard"){
 
             let container = document.getElementsByClassName('misgifoscontainer')[0]
-            container.appendChild(generaldiv)
+            container.innerHTML+= generaldiv
 
         } else {
             let container = document.getElementsByClassName('containerapiresult')[0]
-            container.appendChild(generaldiv)
+            container.innerHTML+= generaldiv
         }
     }
 
