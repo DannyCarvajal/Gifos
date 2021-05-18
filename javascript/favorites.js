@@ -38,7 +38,7 @@ function favoritesstorage(urlfav) {
 
         var comparisonarray = favidlist()
         let comparison2 = urlfav.split('idcardgif')
-        var idurlfav = comparison2[1]
+        var idurlfav = comparison2[1].trim()
     }
 
     /* IF THE LOCAL ISN'T EMPTY AND MATCHES WITH A PREVIOUS ID ERASE IT, OTHERWISE ADD IT */
@@ -66,8 +66,8 @@ function localfavpressed() {
     for (let i = 0; i < images.length; i++) {
 
         /* PRESS THE HEART IF IT'S IN THE LOCAL STORAGE */
-        let heartactive = images[i].previousSibling.previousSibling
-        let imageid = images[i].innerText
+        let heartactive = images[i].previousElementSibling.previousElementSibling
+        let imageid = images[i].innerText.trim()
 
 
         if (infosrc.includes(imageid)) {

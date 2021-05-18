@@ -36,7 +36,7 @@ function sendApiRequest() {
         &rating=pg&api_key=${APIkey1}`
 
     /* HEADER OF THE CONTAINER WITH THE TITLE SEARCH */
-    let titleApiRequest = document.getElementsByClassName('titleApiRequest')[0]
+    let titleApiRequest = document.getElementsByClassName('tituloapirequest')[0]
     titleApiRequest.innerHTML = userInput;
 
     /* STYLES FOR THE CONTAINER*/
