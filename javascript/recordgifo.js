@@ -219,10 +219,10 @@ async function uploadGif(sendform) {
     let gifid = response.data.id
 
     /* FETCH TO THE API */
-    var giphyApiURL = `https://api.giphy.com/v1/gifs/${gifid}?api_key=${APIkey2}`
+    let giphyApiURL = `https://api.giphy.com/v1/gifs/${gifid}?api_key=${APIkey2}`
 
-    var fetchreq = await fetch(giphyApiURL)
-    var requestres = await fetchreq.json()
+    let fetchreq = await fetch(giphyApiURL)
+    let requestres = await fetchreq.json()
 
     /* GET THE IMAGE OF YOUR GIF  */
     let imgPathmisgifos = requestres.data.images.downsized_medium.url +' title mygif '+'idcardgif '+ gifid ;
