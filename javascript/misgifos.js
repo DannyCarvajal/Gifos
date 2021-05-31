@@ -33,6 +33,11 @@ if (idlist.length !==0) {
 
 }
 
+const printMyGif = () => {
+
+    
+}
+
 
 function misgifosstorage(urlmisgifos){
 

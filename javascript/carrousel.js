@@ -1,11 +1,9 @@
-
 /* REQUEST THE TRENDING CARROUSEL IMAGES */
 var giphyApitrending = `https://api.giphy.com/v1/gifs/trending?api_key=${APIkey1}&rate=g&limit=12`
 
 /*SELECT THE BUTTONS  */
 var rightarrowtrending = document.getElementsByClassName('flechaDerecha')[0]
 var leftarrowtrending = document.getElementsByClassName('flechaIzquierda')[0]
-
 
 /* CARROUSEL CARDS  */
 !async function carrouselImages(giphyApitrending) {
@@ -15,8 +13,7 @@ var leftarrowtrending = document.getElementsByClassName('flechaIzquierda')[0]
         let fetchtopics = await fetch(giphyApitrending)
         let response = await fetchtopics.json()
 
-        cardGif(response, 'card-trending', 1, 'tarjeta')
-        /* MOVE ON BOTH CLICK AND ADD TRANSITION */
+        printGifCarrousel(response.data)
 
         // RIGHT MOVE
         rightarrowtrending.addEventListener('click', translatex)
@@ -26,13 +23,27 @@ var leftarrowtrending = document.getElementsByClassName('flechaIzquierda')[0]
 
     }
     catch (error) {
-        console.error('palper en trending topics')
+        console.error('palper en trending topics', error)
     }
 }(giphyApitrending)
 
+const printGifCarrousel = (json) => {
 
+    console.log(json);
 
+    json.forEach(Gifelement => {
 
+        const cardModel = createCardModel(Gifelement, 1,"card1 card1-interaction3" ,"Assets/icon-fav.svg","card1 card1-interaction3-active" , "Assets/icon-fav-active.svg","overlay-colorselect" ,"tarjeta", "card-trending" )
+
+        const container = document.getElementsByClassName('cards')[0]
+        container.innerHTML += cardModel
+    })
+
+    hoverCardOptions('card-trending', 1)
+    cardoptionsfuc(1, 0)
+    localfavpressed()
+
+}
 
 
 
@@ -65,9 +76,6 @@ function translatex() {
 }
 
 function translatexreverse() {
-
-
-
 
     if (contadorsliderreverse == 1) {
 

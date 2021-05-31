@@ -1,112 +1,91 @@
 // API Request either on enter or click
-let onEnter = document.getElementById('input')
-let lupaapi = document.getElementsByClassName('lupa')[0]
-onEnter.addEventListener('keydown',enterValidator)
-lupaapi.addEventListener('click', sendApiRequest)
+const gifosInput = document.getElementById('input')
+gifosInput.addEventListener('keydown', enterValidator)
 
 function enterValidator(e) {
     if (e.key === 'Enter')
-        sendApiRequest()
+        beforeFetchChanges()
 };
 
-/* General counter */
-let contadorclicks = 0
+const lupaapi = document.getElementsByClassName('lupa')[0]
+lupaapi.addEventListener('click', beforeFetchChanges)
 
-function sendApiRequest() {
+/* PRINT ANOTHER 12 GIFS */
+const vermas = document.getElementsByClassName('vermas')[0]
 
-    /*----- GENERAL CHANGES BEFORE FETCH----- */
 
-    let searchTrending = document.getElementsByClassName('trending-seccion1')[0]
-    let linea = document.createElement("div")
-    let container = document.getElementsByClassName('containerapiresult')[0]
-    
+function beforeFetchChanges() {
+
+    /* STYLES FOR THE SECTION 1 CONTAINER*/
+    const section1Container = document.getElementsByClassName('resultados-seccion1')[0]
+    section1Container.setAttribute('style', 'display:unset;display: flex;flex-direction: column;justify-content: center; align-items: center;')
+
+    const linea = document.createElement("div")
+    linea.setAttribute('style', 'width:23.5vw; height:0.1px; opacity: 0.5; background-color: #9CAFC3;')
+
+    const searchTrending = document.getElementsByClassName('trending-seccion1')[0]
+    const container = document.getElementsByClassName('containerapiresult')[0]
+
     /* CHANGE SEARCH TITLE  */
     searchTrending.innerHTML = ""
-    /* CREATE LINE STYLE ABOVE SEARCH */
-    linea.setAttribute('style', 'width:23.5vw; height:0.1px; opacity: 0.5; background-color: #9CAFC3;')
-    searchTrending.appendChild(linea)
-    
-    /* CLEAN THE CONTAINER ON A NEW SEARCH  */
     container.innerHTML = ""
-    
-    /*--------------- API REQUEST------------*/
 
-    let userInput = document.getElementById('input').value
-    let giphyApiURL = `https://api.giphy.com/v1/gifs/search?q=${userInput}
-        &rating=pg&api_key=${APIkey1}`
+    /* CREATE LINE STYLE ABOVE SEARCH */
+    searchTrending.appendChild(linea)
+
+    /*--------------- API REQUEST------------*/
+    let userInput = gifosInput.value
+    let giphyApiURL = `https://api.giphy.com/v1/gifs/search?q=${userInput}&rating=pg&api_key=${APIkey1}`
 
     /* HEADER OF THE CONTAINER WITH THE TITLE SEARCH */
-    let titleApiRequest = document.getElementsByClassName('tituloapirequest')[0]
+    const titleApiRequest = document.getElementsByClassName('tituloapirequest')[0]
     titleApiRequest.innerHTML = userInput;
 
-    /* STYLES FOR THE CONTAINER*/
-    let resultsContainer = document.getElementsByClassName('resultados-seccion1')[0]
-    resultsContainer.setAttribute('style', 'display:unset;display: flex;flex-direction: column;justify-content: center; align-items: center;')
-
-    fetchapi(giphyApiURL)
+    gifCards(giphyApiURL)
 }
-
-var Responselist = []
 
 async function fetchapi(giphyApiURL) {
 
     /* FETCH TO THE API */
     let request = await fetch(giphyApiURL)
     let apiResponse = await request.json()
-    
-    /* SEND TO THE API */
-    localStorage.setItem("cardssearch",JSON.stringify(apiResponse))
-    /* OBTAIN    */
-    // let resultinlocal= JSON.parse(localStorage.getItem("cardssearch"))
-    // console.log(resultinlocal)
 
     // COPY THE OBJECT INTO ANOTHER VARIABLE
-    Responselist= JSON.parse(JSON.stringify(apiResponse))
+    return apiResponse.data
+}
 
-    /* PRINT FIRST ROW OF 12 CARDS */
-    cardGif(Responselist, 'response', 2, 'tarjetaAPI')
+const gifCards = async (url) =>{
 
-    vermas(Responselist)
+    let Response = await fetchapi(url)
+    seeMore()
+
+    const seeMore = () =>{ printGif(Response) }
+
+    vermas.addEventListener('click', seeMore)
 }
 
 
-function vermas(Responselist) {
-    var contadorapi = 0
-    
-    /* LOAD ANOTHER SET OF IMAGES WITH SEE MORE*/
-    var vermas= document.getElementsByClassName('vermas')[0]
-    vermas.addEventListener('click', newImages)
 
-    function newImages(){
-        contadorapi++
-        
-        if (contadorapi <= 3) {
-            cardGif(Responselist, 'response', 2, 'tarjetaAPI', 12 * contadorapi, 12 * (contadorapi + 1))
+/* GENERAL FUNCTION TO CREATE SMALL CARDS  */
+const printGif = (json) => {
+
+    const tarjetaAPICount = document.getElementsByClassName('tarjetaAPI').length
+
+    /* PRINT JUST IF ENOUGH GIFS */
+    if (tarjetaAPICount <= 36) {
+
+        for (let i = 0 + tarjetaAPICount; i < tarjetaAPICount + 12; i++) {
+
+            const cardModel = createCardModel(json[i],2, "card2 card2-interaction3","Assets/icon-fav.svg", 'card2 card2-interaction3-active', 'Assets/icon-fav-active.svg','overlay-colorselect','tarjetaAPI', 'response')
+
+            const container = document.getElementsByClassName('containerapiresult')[0]
+            container.innerHTML += cardModel
         }
-    }
-    
-        /* CLEAR API  */
-        onEnter.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter')
-                contadorapi=3
-        })
-    
-        lupaapi.addEventListener('click', () => {
-            contadorapi=3
-        })
 
+    }
+    hoverCardOptions('response', 2)
+    cardoptionsfuc(2, 0)
+    localfavpressed()
 }
 
 
-contadorclicks++
-
-// function suggestioncardclear(){
-    
-//     let lupaimgactive= document.getElementsByClassName('imglupaactive')
-//     for (let i = 0; i < lupaimgactive.length; i++) {
-//         lupaimgactive[i].addEventListener('click',()=>{
-//             contadorapi=3
-//         })
-        
-//     }
-// }

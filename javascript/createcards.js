@@ -1,7 +1,40 @@
 
-/* GENERAL FUNCTION TO CREATE CARDS  */
-function cardGif(json, imageclass, number, divclass, aumento = 0, aumento2 = 12, title) {
+function createCardModel(json , number, card3class, card3src, card4class, card4src, overlayclass,majorclass, imgclass) {
 
+    let imgPathtrending = json.images.downsized_medium.url
+    let gifId = json.id
+
+    /* DEFINIR TITULO Y CREADOR */
+    const [titlefinal, userfinal] = titlecreator(json.title)
+
+    return card = `<div class= "${majorclass}">
+        <div class="cardoptions cardoptionshover${number}">
+            <img class="card${number} card${number}-interaction1" src="Assets/icon-max-normal.svg"> 
+            <img class="card${number} card${number}-interaction2" src="Assets/icon-download.svg"> 
+            <img class="${card3class}" src="${card3src}"> 
+            <img class="${card4class}" src="${card4src}"> 
+            <div class="card${number} card${number}-info"> 
+                <h4>${userfinal}</h4>
+                <p class="titlecurrentgif" >${titlefinal}</p>
+            </div>
+            <p class="gifid" style="display:none;"> ${gifId} </p>
+            <div class="${overlayclass}"> </div>
+        </div>
+            <img class="${imgclass}" src="${imgPathtrending}" alt="${titlefinal}"> 
+        </div>
+        `
+}
+
+
+
+
+
+
+// /* GENERAL FUNCTION TO CREATE CARDS  */
+function cardGif(json, imageclass, number, divclass, aumento = 0, aumento2 = 12) {
+
+
+    console.log(json)
     for (let i = 0 + aumento; i < aumento2; i++) {
 
 
@@ -51,14 +84,7 @@ function cardGif(json, imageclass, number, divclass, aumento = 0, aumento2 = 12,
         }
 
         /* DEFINIR TITULO Y CREADOR */
-        if (title.includes('by')) {
-            var dividiendoeltitulo = title.split("by")
-            var titlefinal = dividiendoeltitulo[0].replace('GIF', '')
-            var userfinal = dividiendoeltitulo[1].trim(0)
-        } else {
-            var titlefinal = title.replace('GIF', '')
-            var userfinal = " "
-        }
+        const [titlefinal,userfinal] = titlecreator(title)
 
 
         let generaldiv= `
@@ -111,10 +137,27 @@ function cardGif(json, imageclass, number, divclass, aumento = 0, aumento2 = 12,
 
 }
 
+/* RETURN THE TITLE AND NAME OF THE USER */
+const titlecreator = (title) => {
+
+    if (title.includes('by')) {
+        let dividiendoeltitulo = title.split("by")
+        let titlefinal = dividiendoeltitulo[0].replace('GIF', '')
+        let userfinal = dividiendoeltitulo[1].trim(0)
+        return [titlefinal, userfinal]
+
+    } else {
+        let titlefinal = title.replace('GIF', '')
+        let userfinal = " "
+        return [titlefinal, userfinal]
+    }
+
+}
+
 
 
 /* ON HOVER SHOW CARD OPTIONS  */
-function hoverCardOptions(imgClass, number) {
+const hoverCardOptions = (imgClass, number) => {
 
     let imgonhoverClass = document.getElementsByClassName(imgClass)
     let cardgeneral = document.getElementsByClassName(`card${number}`)
@@ -256,12 +299,25 @@ function sendHeartLocal(i, number) {
         /* INFORMATION OF THE CARD CLICKED  */
         let titlefavgif = titlecrtgif[i].lastElementChild.innerText
         let userfavgif = titlecrtgif[i].firstElementChild.innerText
-        let fulltitle = titlefavgif + ' by ' + userfavgif
+        let title = `${titlefavgif} GIF by ${userfavgif}`
         /* GIF ID */
-        let gifid = titlecrtgif[i].nextElementSibling.innerText
+        let id = titlecrtgif[i].nextElementSibling.innerText.trim()
         /* URL OF THE IMAGE */
-        let urlsrc = titlecrtgif[i].parentElement.parentElement.lastElementChild.src
-        var urlfav = urlsrc + ' title ' + fulltitle + 'idcardgif' + gifid
+        let url = titlecrtgif[i].parentElement.parentElement.lastElementChild.src
+        var urlfav = url + ' title ' + title + 'idcardgif' + id
+
+        let fav = {
+            title,
+            id,
+            images:{
+                downsized_medium:{
+                    url
+                }
+            }
+
+        }
+
+        console.log('this is the object ',fav);
 
         heartactive[i].classList.toggle("display")
 
@@ -315,7 +371,6 @@ async function downloadGif(id,dtitle) {
     let realid = id.trim()
     let title = dtitle
     // get image as blob
-    // let response = await fetch(`https://media0.giphy.com/media/${realid}/giphy.gif?cid=e9ff928175irq2ybzjyiuicjuxk21vv4jyyn0ut5o0d7co50&rid=giphy.gif`)
     let response = await fetch(`https://media.giphy.com/media/${realid}/giphy.gif?rid=giphy.gif`)
     let file = await response.blob()
 

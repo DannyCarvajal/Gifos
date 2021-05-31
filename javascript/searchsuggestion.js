@@ -1,6 +1,6 @@
 /* SUGGESTION INPUT */
 const inputsug = document.getElementsByClassName('inputsuggestion')[0]
-inputsug.addEventListener('keyup', suggestionreq)
+inputsug.addEventListener('keyup',suggestionreq)
 
 /* CONTAINER ELEMENTS */
 const borderinput = document.getElementsByClassName('border-buscador-seccion1')[0]
