@@ -151,7 +151,7 @@ const titlecreator = (title) => {
         let userfinal = " "
         return [titlefinal, userfinal]
     }
-
+    
 }
 
 

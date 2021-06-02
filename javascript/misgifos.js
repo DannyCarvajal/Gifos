@@ -66,8 +66,3 @@ function misgifosstorage(urlmisgifos){
     console.log('la nueva lista es '+ idlist)
     localStorage.setItem('misgifos', JSON.stringify(idlist))
 }
-
-
-
-
-
