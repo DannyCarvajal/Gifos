@@ -5,31 +5,31 @@
 
 .cardoptions{
                     
-    &.cardoptionshover1,&.cardoptionshover2{
+    &.cardoptionshover{
         display: none;
     }
 
-    .card1-interaction1,.card2-interaction1,.card1-interaction2,.card2-interaction2,.card1-interaction3,.card2-interaction3{
+    .card-interaction1,.card-interaction1,.card-interaction2,.card-interaction2,.card-interaction3,.card-interaction3{
         position: absolute;
         top: 10px;
         cursor: pointer;
         z-index: 40;
     }
 
-    .card1-interaction1,.card2-interaction1{
+    .card-interaction1{
     right: 10px;
 
 }
 
-    .card1-interaction2,.card2-interaction2{
+    .card-interaction2{
         right: 55px;
     }
 
-    .card1-interaction3,.card2-interaction3{
+    .card-interaction3{
         right: 100px;
     }
 
-    .card1-interaction3-active,.card2-interaction3-active{
+    &>.card-interaction3-active{
         position: absolute;
         right: 105.90px;
         transform: scale(0.885);
@@ -43,7 +43,7 @@
         }
     }
 
-    .card1-info,.card2-info{
+    .cardtitles{
         top: 65.82%;
         left: 18px;
         position: absolute;
@@ -91,7 +91,7 @@
 
 }
 
-.card3-interaction3-active{
+.card-interaction3-active{
     transform: scale(0.885);
 
     display: none;

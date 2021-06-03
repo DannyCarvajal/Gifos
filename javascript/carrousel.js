@@ -27,13 +27,14 @@ const leftarrowCarrousel = document.getElementsByClassName('flechaIzquierda')[0]
 const printGifCarrousel = (json) => {
     
     json.forEach(Gifelement => {
-        const cardModel = createCardModel(Gifelement, 1,"card1 card1-interaction3" ,"Assets/icon-fav.svg","card1 card1-interaction3-active" , "Assets/icon-fav-active.svg","overlay-colorselect" ,"tarjeta", "card-trending" )
+        const cardModel = createCardModel(Gifelement,"tarjeta", "card-trending" )
         container.innerHTML += cardModel
     })
     
-    hoverCardOptions('card-trending', 1)
-    cardoptionsfuc(1, 0)
-    localfavpressed()
+    onHoverCard('bigSize')
+    heartButton()
+    // cardoptionsfuc()
+    // localfavpressed()
     
 }
 

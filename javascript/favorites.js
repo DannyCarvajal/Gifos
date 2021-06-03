@@ -13,10 +13,11 @@ var favlist
 
 }()
 
+
 /* CREATE THE CARDS INSIDE THE FAV SECTION*/
 if (favlist.length !== 0 && document.body.id == "favoritos") {
-
-    let container = document.getElementsByClassName('containerfavabroad')[0]
+    
+    const container = document.getElementsByClassName('containerfavabroad')[0]
 
     /* REMOVE PREVIOUS CONTAINER ITEMS */
     for (let i = 0; i < 2; i++) {

@@ -1,5 +1,5 @@
 
-function createCardModel(json , number, card3class, card3src, card4class, card4src, overlayclass,majorclass, imgclass) {
+function createCardModel(json, majorclass, imgclass) {
 
     let imgPathtrending = json.images.downsized_medium.url
     let gifId = json.id
@@ -7,135 +7,34 @@ function createCardModel(json , number, card3class, card3src, card4class, card4s
     /* DEFINIR TITULO Y CREADOR */
     const [titlefinal, userfinal] = titlecreator(json.title)
 
+    let infoStorage = `
+    {  "title": "${json.title}",
+        "id": "${gifId}",
+        "images":{
+            "downsized_medium":{
+                "url": "${imgPathtrending}"
+            }
+        }
+    }`
+
     return card = `<div class= "${majorclass}">
-        <div class="cardoptions cardoptionshover${number}">
-            <img class="card${number} card${number}-interaction1" src="Assets/icon-max-normal.svg"> 
-            <img class="card${number} card${number}-interaction2" src="Assets/icon-download.svg"> 
-            <img class="${card3class}" src="${card3src}"> 
-            <img class="${card4class}" src="${card4src}"> 
-            <div class="card${number} card${number}-info"> 
+        <div class="cardoptions cardoptionshover">
+            <img class="card card-interaction1" src="Assets/icon-max-normal.svg"> 
+            <img class="card card-interaction2" src="Assets/icon-download.svg"> 
+            <img class="card card-interaction3 " src="Assets/icon-fav.svg"> 
+            <img class="card card-interaction3-active ${gifId}" src="Assets/icon-fav-active.svg"> 
+            <p class="gifInfo" style="display:none;"> ${infoStorage} </p>
+            <div class="cardtitles"> 
                 <h4>${userfinal}</h4>
                 <p class="titlecurrentgif" >${titlefinal}</p>
             </div>
-            <p class="gifid" style="display:none;"> ${gifId} </p>
-            <div class="${overlayclass}"> </div>
+            <div class="overlay-colorselect"> </div>
         </div>
             <img class="${imgclass}" src="${imgPathtrending}" alt="${titlefinal}"> 
         </div>
         `
 }
 
-
-
-
-
-
-// /* GENERAL FUNCTION TO CREATE CARDS  */
-function cardGif(json, imageclass, number, divclass, aumento = 0, aumento2 = 12) {
-
-
-    console.log(json)
-    for (let i = 0 + aumento; i < aumento2; i++) {
-
-
-        if (divclass === "favoritescard" || divclass === "misgifoscard") {
-
-
-            if (json[i].includes('title')) {
-                var division1 = json[i].split("title")
-                var imgPathtrending = division1[0]
-                var division2 = division1[1].split("idcardgif")
-                var title = division2[0].trim(0)
-                var id = division2[1]
-
-            }
-
-            var card3= {
-                src: "Assets/icon-trash-normal.svg",
-                class:`card${number} card${number}-interaction3 trash`
-            }
-
-            var card4= {
-                src: "Assets/icon-fav-active.svg" ,
-                class: `card${number} card${number}-interaction3-active`,
-                style : "display:none;"
-            }
-
-            var overlayclass= "overlay-colorselect8"
-
-        } else {
-
-            var imgPathtrending = json.data[i].images.downsized_medium.url
-            var title = json.data[i].title
-
-            var card3= {
-                src: "Assets/icon-fav.svg",
-                class:`card${number} card${number}-interaction3`
-            }
-
-            var card4= {
-                src: "Assets/icon-fav-active.svg" ,
-                class:  `card${number} card${number}-interaction3-active`,
-                style : ""
-            }
-            
-            var overlayclass= "overlay-colorselect"
-            var id= json.data[i].id
-        }
-
-        /* DEFINIR TITULO Y CREADOR */
-        const [titlefinal,userfinal] = titlecreator(title)
-
-
-        let generaldiv= `
-            <div class= "${divclass} ">
-                <div class="cardoptions cardoptionshover${number}">
-                    <img class="card${number} card${number}-interaction1" src="Assets/icon-max-normal.svg"> 
-                    <img class="card${number} card${number}-interaction2" src="Assets/icon-download.svg"> 
-                    <img class="${card3.class}" src="${card3.src}"> 
-                    <img class="${card4.class}" style="${card4.style}" src="${card4.src}"> 
-                    <div class="card${number} card${number}-info"> 
-                        <h4>${userfinal}</h4>
-                        <p class="titlecurrentgif" >${titlefinal}</p>
-                    </div>
-                    <p class="gifid" style="display:none;"> ${id} </p>
-                    <div class="${overlayclass}"> </div>
-                </div>
-                <img class="${imageclass}" src="${imgPathtrending}" alt="${titlefinal}"> 
-            </div>
-        `
-
-
-        if (number == 1) {
-
-            var cards = document.getElementsByClassName("cards")[0]
-            cards.innerHTML+= generaldiv
-
-        } else if (divclass == "favoritescard") {
-
-            let container = document.getElementsByClassName('cardfavcontainer')[0]
-            container.innerHTML+= generaldiv
-
-        } else if (divclass == "misgifoscard"){
-
-            let container = document.getElementsByClassName('misgifoscontainer')[0]
-            container.innerHTML+= generaldiv
-
-        } else {
-            let container = document.getElementsByClassName('containerapiresult')[0]
-            container.innerHTML+= generaldiv
-        }
-    }
-
-
-    hoverCardOptions(imageclass, number)
-    cardoptionsfuc(number, aumento)
-
-    /* EVERY TIME A CARD IS CREATED IS CHECKED  */
-    if ( divclass !== "misgifoscard")
-    localfavpressed()
-
-}
 
 /* RETURN THE TITLE AND NAME OF THE USER */
 const titlecreator = (title) => {
@@ -151,126 +50,91 @@ const titlecreator = (title) => {
         let userfinal = " "
         return [titlefinal, userfinal]
     }
-    
-}
-
-
-
-/* ON HOVER SHOW CARD OPTIONS  */
-const hoverCardOptions = (imgClass, number) => {
-
-    let imgonhoverClass = document.getElementsByClassName(imgClass)
-    let cardgeneral = document.getElementsByClassName(`card${number}`)
-
-
-    /* HOVER ON PURPLE  */
-    for (let i = 0; i < imgonhoverClass.length; i++) {
-
-        imgonhoverClass[i].addEventListener('mouseover', () => {
-            imgonhoverClass[i].previousElementSibling.classList.remove(`cardoptionshover${number}`)
-        })
-
-    }
-
-    /* STILL PURPLE HOVER ONMOUSE CARDS */
-    for (let i = 0; i < cardgeneral.length; i++) {
-
-        cardgeneral[i].addEventListener('mouseover', () => {
-            cardgeneral[i].parentElement.classList.remove(`cardoptionshover${number}`)
-        })
-
-    }
-
-    /* REMOVE ON MOUSEOUT */
-    for (let i = 0; i < imgonhoverClass.length; i++) {
-
-        imgonhoverClass[i].addEventListener('mouseout', () => {
-            imgonhoverClass[i].previousElementSibling.classList.add(`cardoptionshover${number}`)
-        })
-
-    }
-
-    for (let i = 0; i < cardgeneral.length; i++) {
-
-        cardgeneral[i].addEventListener('mouseout', () => {
-            cardgeneral[i].parentElement.classList.add(`cardoptionshover${number}`)
-        })
-
-    }
 
 }
 
 
-/* HEART, DOWNLOAD AND MAX INTERACTION */
-function cardoptionsfuc(number, startin) {
+let cardgeneral = document.getElementsByClassName("card")
+let gifImageclassMiniSize = document.getElementsByClassName("response")
+let gifImageclassBigSize = document.getElementsByClassName("card-trending")
 
-    /* HEART BUTTON FAVORITES AND CARD ICON CHANGE */
+/* ON HOVER SHOW TITLE, PURPLE BG, AND BUTTONS  */
+const onHoverCard = (size) => {
 
-    /* HEART */
-    let heart = document.getElementsByClassName(`card${number}-interaction3`);
-    const heartactive = document.getElementsByClassName(`card${number}-interaction3-active`);
+    let className;
 
-    for (let i = startin; i < heart.length; i++) {
-        /* HEART HOVER */
-        iconchange(heart[i], 'mouseover', "Assets/icon-fav-hover.svg");
-        iconchange(heart[i], 'mouseout', "Assets/icon-fav.svg");
+    if (size === "miniSize") {
+        className = gifImageclassMiniSize
+    } else {
+        className = gifImageclassBigSize
+    }
 
-        /* HEART HOVER ON FAV CLICKED HOVER */
-        heartactive[i].addEventListener('mouseover', () => {
-            heart[i].setAttribute('src', 'Assets/icon-fav-hover.svg')
-        })
+    /* SHOW AND REMOVE PURPLE ON HOVER */
+    Array.from(className).forEach(cardGif => {
+        cardGif.addEventListener('mouseover', () => cardGif.previousElementSibling.classList.remove(`cardoptionshover`))
+        cardGif.addEventListener('mouseout', () => cardGif.previousElementSibling.classList.add(`cardoptionshover`))
+    })
 
-        heartactive[i].addEventListener('mouseout', () => {
-            heart[i].setAttribute('src', 'Assets/icon-fav.svg')
-        })
+    /*REMAIN PURPLE HOVER ON PRESSING BUTTONS  */
+    Array.from(cardgeneral).forEach(card => {
+        card.addEventListener('mouseover', () => card.parentElement.classList.remove(`cardoptionshover`))
+        card.addEventListener('mouseout', () => card.parentElement.classList.add(`cardoptionshover`))
+    })
 
-        /* IF FAVORITES USE TRASH INSTEAD OF HEART */
-        if (document.body.id !== "home") {
+}
 
-            var trash = document.getElementsByClassName('trash')
+const heart = document.getElementsByClassName(`card-interaction3`);
+const heartactive = document.getElementsByClassName(`card-interaction3-active`);
+const trash = document.getElementsByClassName('trash')
 
-            for (let i = 0; i < trash.length; i++) {
-                /* TRASH HOVER */
-                iconchange(trash[i], 'mouseover', "Assets/icon-trash-hover.svg");
-                iconchange(trash[i], 'mouseout', "Assets/icon-trash-normal.svg");
-            }
 
+const heartButton = () => {
+
+    for (let i = 0; i < heart.length; i++) {
+
+        /* HEART ICON ON HOVER */
+        iconchange(heart[i], 'mouseover', "Assets/icon-fav-hover.svg")
+        iconchange(heart[i], 'mouseout', "Assets/icon-fav.svg")
+
+        /* STILL HOVER WHILE MOUSEOVER IN INNER HEART */
+        heartactive[i].addEventListener('mouseover', ()=> heart[i].src = "Assets/icon-fav-hover.svg")
+        heartactive[i].addEventListener('mouseout', ()=> heart[i].src = "Assets/icon-fav.svg")
+
+        /* SAVE LIKED HEART, USING THE ID OF THE HEART */
+        heart[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
+        heartactive[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
+    }
+
+    /* FAVORITE AND MY GIF USES TRASH ICON INSTEAD OF HEART */
+    if (document.body.id !== "home") {
+        /* TRASH HOVER */
+        for (let i = 0; i < trash.length; i++) {
+            iconchange(trash[i], 'mouseover', "Assets/icon-trash-hover.svg");
+            iconchange(trash[i], 'mouseout', "Assets/icon-trash-normal.svg");
         }
     }
 
-    pressedheart(startin, number)
-    maxcards(number)
-    downloadcards(number)
+}
+
+const saveLikedHeart = (gifInfo) => {
+
+    let saveGifInfo = JSON.parse(gifInfo)
+    let gifElement = document.getElementsByClassName(saveGifInfo.id)[0]
+
+    console.log(gifElement);
+    gifElement.classList.toggle("display")
+
+    // if (document.body.id == "misgifos") {
+    //     misgifosstorage(saveGifInfo)
+    // } else {
+    //     favoritesstorage(saveGifInfo)
+    // }
 
 }
 
-
-function pressedheart(startin, number) {
-
-    /* HEART */
-    let heart = document.getElementsByClassName(`card${number}-interaction3`);
-    const heartactive = document.getElementsByClassName(`card${number}-interaction3-active`);
-
-    /* CORAZÓN MORADO AL OPRIMIR HEART BUTTON */
-    for (let i = startin; i < heart.length; i++) {
-
-        heart[i].addEventListener("click", () => {
-            sendHeartLocal(i, number)
-        })
-        heartactive[i].addEventListener("click", () => {
-            sendHeartLocal(i, number)
-        })
-    }
-}
 
 /* SEND THE HEART CHANGES TO THE LOCAL */
-function sendHeartLocal(i, number) {
-
-
-    /* HEART */
-    const heartactive = document.getElementsByClassName(`card${number}-interaction3-active`)
-    let titlecrtgif = document.getElementsByClassName(`card${number}-info`)
-    var trash = document.getElementsByClassName('trash')
+function sendHeartLocal(i) {
 
     if (document.body.id != "home" && heartactive[i].previousElementSibling.classList.contains('trash')) {
         trash[i].parentElement.parentElement.setAttribute('style', 'display:none;')
@@ -306,22 +170,13 @@ function sendHeartLocal(i, number) {
         let url = titlecrtgif[i].parentElement.parentElement.lastElementChild.src
         var urlfav = url + ' title ' + title + 'idcardgif' + id
 
-        let fav = {
-            title,
-            id,
-            images:{
-                downsized_medium:{
-                    url
-                }
-            }
 
-        }
 
-        console.log('this is the object ',fav);
+        console.log('this is the object ', fav);
 
         heartactive[i].classList.toggle("display")
 
-        if ( document.body.id == "misgifos"){
+        if (document.body.id == "misgifos") {
             misgifosstorage(urlfav)
         } else {
             favoritesstorage(urlfav)
@@ -333,21 +188,21 @@ function sendHeartLocal(i, number) {
 }
 
 
-function downloadcards(number,maxid,maxtitle) {
+function downloadcards(number, maxid, maxtitle) {
 
     let download = document.getElementsByClassName(`card${number}-interaction2`);
 
     for (let i = 0; i < download.length; i++) {
 
-        if(download[i].classList.contains('card3') || download[i].nextElementSibling.classList.contains('maxcard')){
+        if (download[i].classList.contains('card3') || download[i].nextElementSibling.classList.contains('maxcard')) {
 
-            download[i].addEventListener('click',()=> downloadGif(maxtitle,maxid))
+            download[i].addEventListener('click', () => downloadGif(maxtitle, maxid))
 
         } else {
-            
-            let downloadid= download[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText
-            let downloadtitle= download[i].nextElementSibling.nextElementSibling.nextElementSibling.lastElementChild.innerText
-            download[i].addEventListener('click',()=> downloadGif(downloadid,downloadtitle))
+
+            let downloadid = download[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText
+            let downloadtitle = download[i].nextElementSibling.nextElementSibling.nextElementSibling.lastElementChild.innerText
+            download[i].addEventListener('click', () => downloadGif(downloadid, downloadtitle))
         }
 
 
@@ -361,158 +216,91 @@ function downloadcards(number,maxid,maxtitle) {
 
 
 
-async function downloadGif(id,dtitle) {
+async function downloadGif(id, dtitle) {
 
+    if (dtitle != undefined) {
 
-    if ( dtitle!= undefined){
+        //create new a element
+        let a = document.createElement('a')
+        let realid = id.trim()
+        let title = dtitle
+        // get image as blob
+        let response = await fetch(`https://media.giphy.com/media/${realid}/giphy.gif?rid=giphy.gif`)
+        let file = await response.blob()
 
-    //create new a element
-    let a = document.createElement('a')
-    let realid = id.trim()
-    let title = dtitle
-    // get image as blob
-    let response = await fetch(`https://media.giphy.com/media/${realid}/giphy.gif?rid=giphy.gif`)
-    let file = await response.blob()
-
-    a.download = title
-
-    a.href = window.URL.createObjectURL(file)
-    //click on element to start download
-    a.click()
-
+        a.download = title
+        a.href = window.URL.createObjectURL(file)
+        //click on element to start download
+        a.click()
     }
 
 }
 
 
+const max = document.getElementsByClassName(`card-interaction1`)
 
-
-function maxcards(number) {
-
-    /* DOWNLOAD AND MAX*/
-    let max = document.getElementsByClassName(`card${number}-interaction1`);
-
+const maxButton = () => {
+    
+    
     for (let i = 0; i < max.length; i++) {
         iconchange(max[i], 'mouseover', "Assets/icon-max-hover.svg");
         iconchange(max[i], 'mouseout', "Assets/icon-max-normal.svg");
-
+        
         max[i].addEventListener('click', () => {
 
 
-            /* 1. CONTACT WITH THE RESOURCES */
-
-            /* TITLE */
-            let creator = max[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.firstElementChild.innerText
-            let title = max[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.lastElementChild.innerText
-
-            /* IMAGE */
-            let imagesrc = max[i].parentElement.nextElementSibling.src
-
-            /* PARENT ELEMENT */
-            let parent = max[i].parentElement
-
-            /* GIF ID */
-            let id = max[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText
-
-            /* BACKGROUND */
+            let infoStorage = JSON.parse(max[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText)
             let maxbackground = document.getElementsByClassName('maxbackground')[0]
 
-            /* REPOSITION BUTTONS */
+            const [titlefinal, userfinal] = titlecreator(infoStorage.title)
 
-            var card2 = document.createElement("img")
-            card2.setAttribute("src", "Assets/icon-download.svg")
-            card2.className = `card3 card3-interaction2`
-            card2.setAttribute('style', 'position: absolute; bottom:15px; right: 25px;cursor:pointer;')
+            let card = `
+                <img class="returnButton" src="Assets/close.svg" alt="Return button">
+                <div style="position:fixed;" class= "gifMaxContainer">
+                    <img src="Assets/icon-download.svg"> 
+                    <img src="Assets/icon-fav.svg"> 
+                    <img src="Assets/icon-fav-active.svg"> 
+                    <p class="gifInfo" style="display:none;"> ${JSON.stringify(infoStorage)} </p>
+                    <div class="cardtitles"> 
+                        <h4>${userfinal}</h4>
+                        <p >${titlefinal}</p>
+                    </div>
+                </div>
+        `
+        // <img class="gifMaxImg" src="${infoStorage.images.downsized_medium.url}" alt="${titlefinal}"> 
 
-            /* CREATE NEW IMAGE WITH FIXED POSITION */
-            let newimage = document.createElement("img")
-            newimage.src = imagesrc
-            // newimage.setAttribute('style', 'width:100%; height:100%')
-            newimage.className= "mobileimagemax"
-            // position:fixed; bottom:28%; left:28%;  z-index:100;
+            document.body.innerHTML+= card
+            console.log(card);
 
-            /* Background white */
-            maxbackground.setAttribute('style', 'display:unset')
-            /* Hide scrollbar */
+
+            /* BACKGROUND */
+            maxbackground.setAttribute('style','display:unset;')
+            /* HIDE SCROLLBAR */
             document.documentElement.setAttribute('style', 'overflow-y:hidden;')
 
-            /* GENERAL DIV WITH IMAGE AND BUTTON */
-            let divimgbutton = document.createElement("div")
-            divimgbutton.className= "mobiledivmax"
-            // divimgbutton.setAttribute('style', ' position:fixed; top:17%; left:27%;width:695px; height: 385px;  z-index:100;')
-            // width:48.62%; height: 55%;
-            divimgbutton.appendChild(newimage)
-            divimgbutton.appendChild(card2)
-            document.body.appendChild(divimgbutton)
+            
+            // /* STYLES IMG MAX */
+            let maxImg = document.getElementsByClassName('gifMaxImg')[0]
+            maxImg.setAttribute('style', `
+            position:fixed;
+            top:17%; 
+            left:27%;
+            width:695px; 
+            height: 385px;  
+            z-index:500;
+            `)
+            
+            let returnMaxButton = document.getElementsByClassName('returnButton')[0]
+            returnMaxButton.setAttribute('style', `cursor:pointer;z-index: 500;width:20px; height:20px; position: fixed; top:20px; right:20px;`)
 
+            returnMaxButton.addEventListener('click', () => {
 
-            /* CREATE HEART INSIDE OF MAX IF  */
-            if (!max[i].nextElementSibling.nextElementSibling.classList.contains('trash')) {
-
-                var card3 = document.createElement("img")
-                card3.setAttribute("src", "Assets/icon-fav.svg")
-                card3.className = `card3 card3-interaction3 maxcard`
-                card3.setAttribute('style', 'position: absolute; bottom:15px; right: 74px; cursor:pointer;')
-
-                var card4 = document.createElement("img")
-                card4.setAttribute("src", "Assets/icon-fav-active.svg")
-                card4.className = `card3 card3-interaction3-active maxcard`
-
-                divimgbutton.appendChild(card3)
-                divimgbutton.appendChild(card4)
-
-                let infosrc = favidlist()
-                if (infosrc.includes(id)) {
-                    card4.classList.toggle('display')
-                }
-
-            }
-            downloadcards(3,title,id)
-            cardoptionsfuc(3, 0)
-
-            /* ADD TITLES */
-            let creatortext = document.createElement("h1")
-            creatortext.innerText = creator
-            // creatortext.setAttribute('style', 'position:fixed; font-family: "Montserrat", sans-serif; font-size:15px;font-weight:400; bottom:178px; left:28%; z-index:100; color: var(--negro)')
-            creatortext.classList= "mobilecreatormax"
-            // creatortext.setAttribute('style', 'position:fixed; font-family: "Montserrat", sans-serif; font-size:100%;font-weight:400; bottom:23.5%; left:28%; z-index:100; color: var(--negro)')
-            document.body.appendChild(creatortext)
-
-            /* TITLE */
-            let titletext = document.createElement("p")
-            titletext.innerText = title
-            titletext.classList= "mobiletitlemax"
-            // titletext.setAttribute('style', 'position:fixed; font-family: "Montserrat", sans-serif; font-size:112.5%; font-weight:700; bottom:20%; left:28%; z-index:100; color: var(--negro)')
-            document.body.appendChild(titletext)
-
-            /* GIF ID */
-            let imageid = document.createElement("p")
-            imageid.innerText = id
-            imageid.className = "gifid"
-            imageid.setAttribute('style', 'display:none;')
-            document.body.appendChild(imageid)
-
-
-            /* RETURN WHEN X IS PRESSED*/
-            let returnx = document.createElement("img")
-            returnx.src = "Assets/close.svg"
-            returnx.className= "returnx"
-            // returnx.setAttribute('style', 'position: absolute; top:-15%; right:-10%; z-index:100; cursor:pointer; height:5%;')
-            divimgbutton.appendChild(returnx)
-
-            let eliminate = [divimgbutton, returnx, creatortext, titletext, imageid]
-
-            returnx.addEventListener('click', () => {
-
-                eliminate.forEach(element => {
-                    element.parentNode.removeChild(element)
-                });
-
-                maxbackground.setAttribute('style', 'display:none;')
-
-                localfavpressed()
-
+                document.body.removeChild(document.body.lastElementChild)
+                document.body.removeChild(document.body.lastElementChild)
+                maxbackground.setAttribute('style','display:none;')
                 document.documentElement.setAttribute('style', 'overflow-y:unset;')
+                console.log(maxbackground);
+                // localfavpressed()
 
             })
         })

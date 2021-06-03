@@ -69,12 +69,13 @@ const printGif = (json) => {
 
         for (let i = 0 + tarjetaAPICount; i < tarjetaAPICount + 12; i++) {
             // const cardModel = createCardModel(json[i],2, "card2 card2-interaction3","Assets/icon-fav.svg", 'card2 card2-interaction3-active', 'Assets/icon-fav-active.svg','overlay-colorselect','tarjetaAPI', 'response')
-            const cardModel = createCardModel(json[i],1, "card1 card1-interaction3","Assets/icon-fav.svg", 'card1 card1-interaction3-active', 'Assets/icon-fav-active.svg','overlay-colorselect','tarjetaAPI', 'response')
+            const cardModel = createCardModel(json[i],"tarjetaAPI", "response")
             containerApiResult.innerHTML += cardModel
         }
 
     }
-    hoverCardOptions('response', 1)
-    cardoptionsfuc(1, 0)
-    localfavpressed()
+    onHoverCard('miniSize')
+    heartButton()
+    // cardoptionsfuc()
+    // localfavpressed()
 }
