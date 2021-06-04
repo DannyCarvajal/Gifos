@@ -54,7 +54,6 @@ const gifCards = async (url) =>{
     Response = Responsejson.data
 
     printGif(Response) 
-    
     vermas.addEventListener('click',seeMore)
 }
 
@@ -66,16 +65,12 @@ const printGif = (json) => {
 
     /* PRINT JUST IF ENOUGH GIFS */
     if (tarjetaAPICount <= 36) {
-
         for (let i = 0 + tarjetaAPICount; i < tarjetaAPICount + 12; i++) {
-            // const cardModel = createCardModel(json[i],2, "card2 card2-interaction3","Assets/icon-fav.svg", 'card2 card2-interaction3-active', 'Assets/icon-fav-active.svg','overlay-colorselect','tarjetaAPI', 'response')
             const cardModel = createCardModel(json[i],"tarjetaAPI", "response")
             containerApiResult.innerHTML += cardModel
         }
-
     }
     onHoverCard('miniSize')
     heartButton()
-    // cardoptionsfuc()
-    // localfavpressed()
+    downloadcards()
 }

@@ -33,10 +33,12 @@ const printGifCarrousel = (json) => {
     
     onHoverCard('bigSize')
     heartButton()
-    // cardoptionsfuc()
-    // localfavpressed()
-    
+    downloadcards()
+
 }
+
+
+/* CARROUSEL */
 
 let ReverseCarrouselCounter = 1 , NormalCarrouselCounter = 1;
 const tarjetas = document.getElementsByClassName('tarjeta')

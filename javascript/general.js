@@ -1,16 +1,9 @@
 /* API KEYS */
 const APIkey1 = "aJ2dqTQO1FnTqFW200cIokXq4VwdVYTl"
-// const APIkey2 = "bqYEWvblUOmRhEaNR9NoUmWCxOFmXQm0"
-// const APIkey3 = "sy5TZIKLHt1Zm0hyBPoK3toaaoxK0hHT"
-// const APIkey4 = "CXMg8k4qSHCnGhujyJ9Y77WT29KqScTx"
 
 function iconchange(name, method, src) {
-
-    name.addEventListener(`${method}`, metododeCambio);
-
-    function metododeCambio() {
-        name.setAttribute('src', `${src}`)
-    }
+    
+    name.addEventListener(`${method}`, ()=> name.src = src);
 }
 
 
@@ -35,3 +28,31 @@ function methodChange(nombre, metodo, normal, night) {
         svgChange(nombre, `${normal}`, `${night}`)
     })
 }
+
+
+/* STORAGE FAVORITE GIFS */
+
+var favlist
+!function initFavStorage() {
+    if (JSON.parse(localStorage.getItem("favorites"))) {
+        /* IF THERE'S SOMETHING INSIDE */
+        favlist = JSON.parse(localStorage.getItem("favorites"))
+        console.log(favlist)
+    } else {
+        /* IF THE FAV LIST IS EMPTY */
+        favlist = []
+    }
+}()
+
+/* STORAGE MY OWN GIFS */
+var myGifList
+!function initMyGifStorage() {
+
+    if (JSON.parse(localStorage.getItem("misgifos"))) {
+        myGifList = JSON.parse(localStorage.getItem("misgifos"))
+        console.log(myGifList)
+    } else {
+        myGifList = []
+    }
+
+}()

@@ -1,9 +1,7 @@
-
-
 /* TEMPLATE FOR NAV AND FOOTER */
-
 const navcontainer = document.getElementsByClassName('navcontainer')[0]
 let templatenav = document.createElement('template')
+
 templatenav.innerHTML = `<nav>
 
 <img src="Assets/GIFOSLOGO.svg" alt="Logo de Gifos " class="logo">
@@ -80,16 +78,12 @@ function containeranimation(quit){
     
     }
 
-
-
 }    
-
-
-
 
 
 const footercontainer = document.getElementsByClassName('footercontainer')[0]
 let templatefooter = document.createElement('template')
+
 templatefooter.innerHTML = `    <footer>
 <div class="redesSociales">
     <p class="tituloespecial">Compartir en:</p>
@@ -116,34 +110,16 @@ const twitter = document.getElementsByClassName("twitter")[0]
 
 /* IN WHAT PAGE AM I? */
 const page = document.body.id
-
-let home, favoritos, misgifos, creatugifoxd
-
-(page === "home") ? home = true : home = false;
-
-(page === "favoritos") ? favoritos = true : favoritos = false;
-
-(page === "misgifos") ? misgifos = true : misgifos = false;
-
-(page === "creatugifoxd") ? creatugifoxd = true : creatugifoxd = false;
-
-
+const logo = document.getElementsByClassName('logo')[0]
 
 /*NAVEGATOR  */
-
-if (home === false) {
-
-    const logo = document.getElementsByClassName('logo')[0];
-    logo.addEventListener('click', () => {
-        location.href = "index.html"
-    })
-
-}
+if (page !== "home") 
+    logo.addEventListener('click', () => { location.href = "index.html"})
 
 
-/* SECCION 1 */
+/* SECTION 1 */
 
-if (home === true) {
+if (page === "home") {
 
     const vermas = document.getElementsByClassName('vermas')[0]
     iconchange(vermas, 'mouseover', 'Assets/CTA-ver-mas-hover.svg')
@@ -153,46 +129,40 @@ if (home === true) {
 
 /*------------------ CARROUSEL---------------------- */
 
-/* FLECHAS */
+/* ARROWS */
 
-if (creatugifoxd === false) {
+if (page !== "creatugifoxd") {
 
-    iconchange(leftarrow, 'mouseover', "Assets/button-slider-left-hover.svg");
-    iconchange(leftarrow, 'mouseout', "Assets/button-slider-left.svg");
+    iconchange(leftarrow, 'mouseover', "Assets/button-slider-left-hover.svg")
+    iconchange(leftarrow, 'mouseout', "Assets/button-slider-left.svg")
 
-    iconchange(rightarrow, 'mouseover', "Assets/Button-Slider-right-hover.svg");
-    iconchange(rightarrow, 'mouseout', "Assets/Button-Slider-right.svg");
+    iconchange(rightarrow, 'mouseover', "Assets/Button-Slider-right-hover.svg")
+    iconchange(rightarrow, 'mouseout', "Assets/Button-Slider-right.svg")
 
+    let creatugifo = document.getElementsByClassName('creatugifo')[0]
+    iconchange(creatugifo, 'mouseover', 'Assets/CTA-crear-gifo-hover.svg')
+    iconchange(creatugifo, 'mouseout', 'Assets/button-crear-gifo.svg')
+    iconchange(creatugifo, 'mousedown', 'Assets/CTA-crear-gifo-active.svg')
 
-    let creatugifo = document.getElementsByClassName('creatugifo')[0];
-    iconchange(creatugifo, 'mouseover', 'Assets/CTA-crear-gifo-hover.svg');
-    iconchange(creatugifo, 'mouseout', 'Assets/button-crear-gifo.svg');
-    iconchange(creatugifo, 'mousedown', 'Assets/CTA-crear-gifo-active.svg');
-
-    /* INTERACTION CARDS */
-
-    /*----------------------------- FOOTER----------------------------- */
-
-    /* SOCIAL MEDIA */
-
-    iconchange(facebook, 'mouseover', 'Assets/icon_facebook_hover.svg');
-    iconchange(facebook, 'mouseout', 'Assets/icon_facebook.svg');
-    iconchange(instagram, 'mouseover', 'Assets/icon_instagram-hover.svg');
-    iconchange(instagram, 'mouseout', 'Assets/icon_instagram.svg');
-    iconchange(twitter, 'mouseover', 'Assets/icon-twitter-hover.svg');
-    iconchange(twitter, 'mouseout', 'Assets/icon-twitter.svg');
+    /*FOOTER */
+    iconchange(facebook, 'mouseover', 'Assets/icon_facebook_hover.svg')
+    iconchange(facebook, 'mouseout', 'Assets/icon_facebook.svg')
+    iconchange(instagram, 'mouseover', 'Assets/icon_instagram-hover.svg')
+    iconchange(instagram, 'mouseout', 'Assets/icon_instagram.svg')
+    iconchange(twitter, 'mouseover', 'Assets/icon-twitter-hover.svg')
+    iconchange(twitter, 'mouseout', 'Assets/icon-twitter.svg')
 
 }
-/*----------------------------------- DARKMODE--------------------------------------------- */
 
+/* DARKMODE */
 
-let activateDarkMode = document.getElementsByClassName('nav-items item1')[0];
-let activateDarkMode2 = document.getElementsByClassName('responsive1')[0];
+let activateDarkMode = document.getElementsByClassName('nav-items item1')[0]
+let activateDarkMode2 = document.getElementsByClassName('responsive1')[0]
 
 let darkyvalue = sessionStorage.getItem('darky')
 
-activateDarkMode.addEventListener('click', darkmode);
-activateDarkMode2.addEventListener('click', darkmode);
+activateDarkMode.addEventListener('click', darkmode)
+activateDarkMode2.addEventListener('click', darkmode)
 
 let contador = 0;
 
@@ -234,7 +204,7 @@ function darkmode() {
     methodChange(creatugifo, 2, 'Assets/button-crear-gifo.svg', 'Assets/CTA-crar-gifo-modo-noc.svg');
 
 
-    if (home === true) {
+    if ( page === "home") {
 
         /* INPUT  */
         let lupa = document.getElementsByClassName('lupa')[0];
