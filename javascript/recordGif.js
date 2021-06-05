@@ -38,8 +38,8 @@ async function firststep() {
         playvideo()
 
     }
-    catch {
-        console.error('error here')
+    catch (error){
+        console.error('error here '+error)
 
     }
 

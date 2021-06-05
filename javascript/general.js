@@ -37,7 +37,6 @@ var favlist
     if (JSON.parse(localStorage.getItem("favorites"))) {
         /* IF THERE'S SOMETHING INSIDE */
         favlist = JSON.parse(localStorage.getItem("favorites"))
-        console.log(favlist)
     } else {
         /* IF THE FAV LIST IS EMPTY */
         favlist = []
@@ -50,7 +49,6 @@ var myGifList
 
     if (JSON.parse(localStorage.getItem("misgifos"))) {
         myGifList = JSON.parse(localStorage.getItem("misgifos"))
-        console.log(myGifList)
     } else {
         myGifList = []
     }
