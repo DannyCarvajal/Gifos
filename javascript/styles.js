@@ -35,50 +35,50 @@ templatenav.innerHTML = `<nav>
 navcontainer.appendChild(templatenav.content)
 
 
-/* Hmaburguer Responsive */
+/* HAMBURGUER RESPONSIVE */
 
-let hamburguer= document.getElementsByClassName('hamburguer')[0]
-
-
-let contadornav = 0 
+let hamburguer = document.getElementsByClassName('hamburguer')[0]
 
 
-window.addEventListener('scroll',()=>{
+let contadornav = 0
+
+
+window.addEventListener('scroll', () => {
     containeranimation(true)
 })
-hamburguer.addEventListener('click',()=>{
+hamburguer.addEventListener('click', () => {
     containeranimation(false)
 })
 
 
-function containeranimation(quit){
+function containeranimation(quit) {
 
-    let firstspan= hamburguer.firstElementChild
-    let secondspan= hamburguer.firstElementChild.nextElementSibling
-    let thirdspan= hamburguer.lastElementChild
-    let responsivenav= document.getElementsByClassName('responsive-nav')[0]
-    let navbg= document.getElementsByClassName('navbg')[0]
+    let firstspan = hamburguer.firstElementChild
+    let secondspan = hamburguer.firstElementChild.nextElementSibling
+    let thirdspan = hamburguer.lastElementChild
+    let responsivenav = document.getElementsByClassName('responsive-nav')[0]
+    let navbg = document.getElementsByClassName('navbg')[0]
 
-    if ( contadornav == 0 && quit === false){
-    
-        firstspan.setAttribute('style',' transition:1s;transform: rotate(45deg) translateY(5.3px) translateX(5.3px);')
-        secondspan.setAttribute('style','transition:1s; transform: rotate(-45deg) translateX(0px);')
-        thirdspan.setAttribute('style','display:none;')
-        responsivenav.setAttribute('style','transition:1s; transform: none;')
-        navbg.setAttribute('style','transition:1s; transform:none;')
-        contadornav=1
-    
+    if (contadornav == 0 && quit === false) {
+
+        firstspan.setAttribute('style', ' transition:1s;transform: rotate(45deg) translateY(5.3px) translateX(5.3px);')
+        secondspan.setAttribute('style', 'transition:1s; transform: rotate(-45deg) translateX(0px);')
+        thirdspan.setAttribute('style', 'display:none;')
+        responsivenav.setAttribute('style', 'transition:1s; transform: none;')
+        navbg.setAttribute('style', 'transition:1s; transform:none;')
+        contadornav = 1
+
     } else {
-        firstspan.setAttribute('style',' transition:1s;transform: none;')
-        secondspan.setAttribute('style','transition:1s; transform: none;')
-        thirdspan.setAttribute('style','transition:2s; display:block;')
-        responsivenav.setAttribute('style','transition:1s; transform: translateX(-100%);')
-        navbg.setAttribute('style','transition:1s; transform: translateX(-100%);')
-        contadornav=0
-    
+        firstspan.setAttribute('style', ' transition:1s;transform: none;')
+        secondspan.setAttribute('style', 'transition:1s; transform: none;')
+        thirdspan.setAttribute('style', 'transition:2s; display:block;')
+        responsivenav.setAttribute('style', 'transition:1s; transform: translateX(-100%);')
+        navbg.setAttribute('style', 'transition:1s; transform: translateX(-100%);')
+        contadornav = 0
+
     }
 
-}    
+}
 
 
 const footercontainer = document.getElementsByClassName('footercontainer')[0]
@@ -113,8 +113,8 @@ const page = document.body.id
 const logo = document.getElementsByClassName('logo')[0]
 
 /*NAVEGATOR  */
-if (page !== "home") 
-    logo.addEventListener('click', () => { location.href = "index.html"})
+if (page !== "home")
+    logo.addEventListener('click', () => { location.href = "index.html" })
 
 
 /* SECTION 1 */
@@ -164,11 +164,12 @@ let darkyvalue = sessionStorage.getItem('darky')
 activateDarkMode.addEventListener('click', darkmode)
 activateDarkMode2.addEventListener('click', darkmode)
 
-let contador = 0;
+let contador = 0
 
-if (darkyvalue == 'true') {
+if (darkyvalue == 'true')
     darkmode()
-}
+
+
 
 function darkmode() {
 
@@ -178,56 +179,46 @@ function darkmode() {
         sessionStorage.setItem('darky', 'true');
     }
 
-
+    const body = document.getElementsByClassName('darkmode')[0]
+    const creatugifo = document.getElementsByClassName('creatugifo')[0]
+    
     /* BODY COLOR */
-    let body = document.getElementsByClassName('darkmode')[0];
     body.classList.toggle('dark-mode');
 
-    /* MAIN FUNCTIONS */
-
-    /* ICONS */
-
-    let logo = document.getElementsByClassName('logo')[0];
-    let creatugifo = document.getElementsByClassName('creatugifo')[0];
-
+    /* LOGO */
     svgChange(logo, 'Assets/GIFOSLOGOTDFW.svg', 'Assets/GIFOSLOGO.svg')
 
+
+    let mododiurno = document.getElementsByClassName('item1')[0]
+    let mododiurnomobile = document.getElementsByClassName('item1')[1]
+
     if (contador % 2 == 0) {
-        logo.setAttribute('style', 'width:97px;height:97px;');
+        logo.setAttribute('style', 'width:97px;height:97px;')
+        activateDarkMode.innerHTML = "MODO DIURNO"
+        activateDarkMode2.innerHTML = "MODO DIURNO"
     } else {
-        logo.setAttribute('style', 'width:100px;height:100px;');
+        logo.setAttribute('style', 'width:100px;height:100px;')
+        mododiurno.innerHTML = "MODO NOCTURNO"
+        mododiurnomobile.innerHTML = "MODO NOCTURNO"
     }
 
     svgChange(creatugifo, 'Assets/CTA-crar-gifo-modo-noc.svg', 'Assets/button-crear-gifo.svg')
 
-    methodChange(creatugifo, 1, 'Assets/CTA-crear-gifo-hover.svg', 'Assets/CTA-crear-gifo-modo-noc.svg');
-    methodChange(creatugifo, 2, 'Assets/button-crear-gifo.svg', 'Assets/CTA-crar-gifo-modo-noc.svg');
+    methodChange(creatugifo, 1, 'Assets/CTA-crear-gifo-hover.svg', 'Assets/CTA-crear-gifo-modo-noc.svg')
+    methodChange(creatugifo, 2, 'Assets/button-crear-gifo.svg', 'Assets/CTA-crar-gifo-modo-noc.svg')
 
 
-    if ( page === "home") {
+    if (page === "home") {
 
         /* INPUT  */
-        let lupa = document.getElementsByClassName('lupa')[0];
+        let lupa = document.getElementsByClassName('lupa')[0]
         svgChange(lupa, 'Assets/icon-search-mod-noc.svg', 'Assets/icon-search.svg')
 
         /* VER MÁS */
-        let vermas = document.getElementsByClassName('vermas')[0];
-        svgChange(vermas, 'Assets/CTA-ver+-modo-noc.svg', 'Assets/CTA-ver-mas.svg');
+        let vermas = document.getElementsByClassName('vermas')[0]
+        svgChange(vermas, 'Assets/CTA-ver+-modo-noc.svg', 'Assets/CTA-ver-mas.svg')
         methodChange(vermas, 1, 'Assets/CTA-ver-mas-hover.svg', 'Assets/CTA-ver+hover-modo-noc.svg')
         methodChange(vermas, 2, 'Assets/CTA-ver-mas.svg', 'Assets/CTA-ver+-modo-noc.svg')
-    }
-
-    /* MODO DIURNO */
-
-    let mododiurno = document.getElementsByClassName('item1')[0]
-    let mododiurnomobile= document.getElementsByClassName('item1')[1]
-
-    if (contador % 2 == 0) {
-        activateDarkMode.innerHTML = "MODO DIURNO"
-        activateDarkMode2.innerHTML = "MODO DIURNO"
-    } else {
-        mododiurno.innerHTML = "MODO NOCTURNO"
-        mododiurnomobile.innerHTML= "MODO NOCTURNO"
     }
 
 
@@ -245,9 +236,9 @@ function darkmode() {
 
         /* FOOTER */
 
-        methodChange(facebook, 1, 'Assets/icon_facebook_hover.svg', 'Assets/facebook-hovernight.svg');
-        methodChange(instagram, 1, 'Assets/icon_instagram-hover.svg', 'Assets/instagram-hovernight.svg');
-        methodChange(twitter, 1, 'Assets/icon-twitter-hover.svg', 'Assets/twitter-hovernight.svg');
+        methodChange(facebook, 1, 'Assets/icon_facebook_hover.svg', 'Assets/facebook-hovernight.svg')
+        methodChange(instagram, 1, 'Assets/icon_instagram-hover.svg', 'Assets/instagram-hovernight.svg')
+        methodChange(twitter, 1, 'Assets/icon-twitter-hover.svg', 'Assets/twitter-hovernight.svg')
 
     } else {
 
@@ -255,12 +246,12 @@ function darkmode() {
         let camara = document.getElementsByClassName('camaradia')[0]
         let pelicula = document.getElementsByClassName('pelicula')[0]
 
-        svgChange(camara, 'Assets/camara-modo-noc.svg', 'Assets/camara.svg');
-        svgChange(pelicula, 'Assets/pelicula-modo-noc.svg', 'Assets/pelicula.svg');
+        svgChange(camara, 'Assets/camara-modo-noc.svg', 'Assets/camara.svg')
+        svgChange(pelicula, 'Assets/pelicula-modo-noc.svg', 'Assets/pelicula.svg')
 
     }
 
-    contador++;
+    contador++
 }
 
 

@@ -1,35 +1,52 @@
-
-.tarjetaAPI,.favoritescard,.misgifoscard{
+.tarjetaAPI,
+.favoritescard,
+.misgifoscard {
     position: relative;
 }
 
-.cardoptions{
-                    
-    &.cardoptionshover{
+.tarjetaAPI{
+
+    .overlay-colorselect{
+        border-radius: 10px;
+    }
+
+}
+
+.card-trending {
+    z-index: 10;
+    width: 357px;
+    height: 275px;
+}
+
+.cardoptions {
+
+    &.cardoptionshover {
         display: none;
     }
 
-    .card-interaction1,.card-interaction1,.card-interaction2,.card-interaction2,.card-interaction3,.card-interaction3{
+    .card-interaction1,
+    .card-interaction2,
+    .card-interaction3 {
         position: absolute;
         top: 10px;
         cursor: pointer;
         z-index: 40;
     }
 
-    .card-interaction1{
-    right: 10px;
+    .card-interaction1 {
+        right: 10px;
 
-}
+    }
 
-    .card-interaction2{
+    .card-interaction2 {
         right: 55px;
     }
 
-    .card-interaction3{
+    .card-interaction3 {
         right: 100px;
     }
 
-    &>.card-interaction3-active{
+    &>.card-interaction3-active {
         position: absolute;
         right: 105.90px;
         transform: scale(0.885);
@@ -38,12 +55,12 @@
         z-index: 40;
         display: none;
 
-        &.display{
+        &.display {
             display: inline-block;
         }
     }
 
-    .cardtitles{
+    .cardtitles {
         top: 65.82%;
         left: 18px;
         position: absolute;
@@ -51,70 +68,43 @@
         pointer-events: none;
         z-index: 40;
 
-        &>h4{
+        &>h4 {
             font: 400 15px/18px $roboto;
             margin-bottom: 5px;
             text-align: left;
         }
 
-        &>p{
+        &>p {
             font: bold 1rem/19px $roboto;
         }
 
     }
 
-.overlay-colorselect{
-    position: absolute;
-    pointer-events: none;
-    right: 0;
-    left: 0;
-    bottom: 3px;
-    top: 0;
-    background: #562ee5c0;
-    opacity: 0.6;
-    z-index: 20;
-    display:block;
-}
-
-.overlay-colorselect8{
-    position: absolute;
-    pointer-events: none;
-    right: 0;
-    left: 0;
-    bottom: 8px;
-    top: 0;
-    background: #562ee5c0;
-    opacity: 0.6;
-    z-index: 20;
-    display:block;
-}
-
-}
-
-.card-interaction3-active{
-    transform: scale(0.885);
-
-    display: none;
-
-    &.display{
-        display: inline-block;
+    .overlay-colorselect {
+        position: absolute;
+        pointer-events: none;
+        right: 0;
+        left: 0;
+        bottom: 3px;
+        top: 0;
+        background: #562ee5c0;
+        opacity: 0.6;
+        z-index: 20;
+        display: block;
     }
-}
 
-.maxcard{
-    position: absolute; 
-    bottom:22.5px; 
-    right: 79.5px;
-    cursor:pointer; 
-
-    &.display{
-        display: inline-block;
+    .overlay-colorselect8 {
+        position: absolute;
+        pointer-events: none;
+        right: 0;
+        left: 0;
+        bottom: 8px;
+        top: 0;
+        background: #562ee5c0;
+        opacity: 0.6;
+        z-index: 20;
+        display: block;
     }
-}
 
-.card-trending{
-    z-index: 10;
-    width: 357px;
-    height: 275px;
+    
 }
-

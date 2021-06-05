@@ -1,6 +1,15 @@
 /* SUGGESTION INPUT */
 const inputsug = document.getElementsByClassName('inputsuggestion')[0]
-inputsug.addEventListener('keyup',suggestionreq)
+inputsug.addEventListener('keyup', validateArrow)
+
+function validateArrow(e) {
+    /* DON'T SEARCH ON ARROWS */
+    if (e.keyCode === 38 || e.keyCode === 40)
+        return e.preventDefault()
+
+    suggestionreq()
+}
+
 
 /* CONTAINER ELEMENTS */
 const borderinput = document.getElementsByClassName('border-buscador-seccion1')[0]
@@ -33,6 +42,7 @@ function suggestionreq() {
 
 }
 
+var termsResponse
 
 async function termsfetch() {
 
@@ -41,7 +51,7 @@ async function termsfetch() {
 
     try {
         let request = await fetch(suggestions)
-        let termsResponse = await request.json()
+        termsResponse = await request.json()
         let lengthResponse = termsResponse.data.length
 
         /* CLEAN SEARCHER ELEMENT WHILE WRITING */
@@ -56,7 +66,7 @@ async function termsfetch() {
     }
 }
 
-const createTermElements = (lengthResponse, termsResponse) => {
+const createTermElements = (lengthResponse) => {
 
     /* SET THE HEIGHT OF THE SEARCHER NAV */
     let heightborder = 80 + lengthResponse * 30
@@ -85,26 +95,59 @@ const createTermElements = (lengthResponse, termsResponse) => {
 
     borderinput.append(ulinput, linegrey)
 
+    inputsug.addEventListener('keyup', arrowSearch)
+
     /* SEARCH TERM CLICKING ON SMALL MAGNIFIER OF EACH IMG */
     let lupaimg = document.getElementsByClassName('lupaactive')
 
     for (let i = 0; i < lupaimg.length; i++) {
         lupaimg[i].addEventListener("click", () => {
-            inputsug.value = inputsug.value = termsResponse.data[i].name
+            inputsug.value = termsResponse.data[i].name
             lupaapi.click()
         })
     }
 
 }
 
+let index = -1
+
+/* SEARCH AMONG THE SUGGESTIONS WITH THE ARROWS */
+const arrowSearch = (e) => {
+
+    let lupalength = document.getElementsByClassName('lupaactive').length
+    /* DOWN ARROW */
+    if (e.keyCode === 40 && index < lupalength - 1) {
+        index++
+        let suggestions = document.getElementsByClassName('lupaactive')[index]
+
+        if (index !== 0)
+            document.getElementsByClassName('lupaactive')[index - 1].setAttribute('style', 'list-style: none; color:#9CAFC3;display:flex; gap:15px')
+
+        suggestions.setAttribute('style', 'list-style: none; color: --var(negro); display:flex; gap:15px')
+        inputsug.value = termsResponse.data[index].name
+    }
+
+    /* UP ARROW */
+    if (e.keyCode === 38 && index > 0) {
+        index--
+        let suggestions = document.getElementsByClassName('lupaactive')[index]
+        document.getElementsByClassName('lupaactive')[index + 1].setAttribute('style', 'list-style: none; color:#9CAFC3;display:flex; gap:15px')
+
+        suggestions.setAttribute('style', 'list-style: none; color: --var(negro); display:flex; gap:15px')
+        inputsug.value = termsResponse.data[index].name
+    }
+
+}
+
+
+
 const eraseSearch = () => {
-
+    
     const navactive = document.getElementsByClassName('navactive')
-
     lupaactive.setAttribute('style', 'position:absolute; left:0px; left:unset;  right:20px; ')
     inputsug.value = "";
     lupaactive.src = 'Assets/icon-search.svg';
-    
+
     borderinput.setAttribute('style', 'height:50px')
     /* NAVACTIVE IS NOT AN ARRAY , WE CAN CONVERT IT WITH ARRAY.FROM OR THE SPREAD OPERATOR [...]*/
     Array.from(navactive).forEach(element => {
@@ -113,12 +156,19 @@ const eraseSearch = () => {
 
 }
 
-const clearactivenav = () => {
+let navactive = document.getElementsByClassName('navactive')
+const clearactivenav = (e) => {
 
-    let navactive = document.getElementsByClassName('navactive')
+    /* DON'T DO IT WITH ARROWS */
+    if ( e !== undefined && e.keyCode === 38 || e !== undefined && e.keyCode === 40)
+        return e.preventDefault()
+
+    /* RESET ARROW SEARCH */
+    index = -1
 
     Array.from(navactive).forEach(element => {
         borderinput.removeChild(element)
     })
     borderinput.setAttribute('style', 'height:50px')
+
 }

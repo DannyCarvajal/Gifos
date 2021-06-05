@@ -3,9 +3,15 @@ const gifosInput = document.getElementById('input')
 gifosInput.addEventListener('keydown', enterValidator)
 
 function enterValidator(e) {
-    if (e.key === 'Enter')
+    if (e.key === 'Enter'){
+        /* STOP SEARCH SUGGESTION */
+        inputsug.removeEventListener('keyup', validateArrow)
         beforeFetchChanges()
-};
+    }
+}
+
+/* START SEARCH SUGGESTION AGAIN ON INPUT CLICK*/
+gifosInput.addEventListener('click', ()=> inputsug.addEventListener('keyup', validateArrow))
 
 const lupaapi = document.getElementsByClassName('lupa')[0]
 lupaapi.addEventListener('click', beforeFetchChanges)
@@ -18,17 +24,20 @@ const titleApiRequest = document.getElementsByClassName('tituloapirequest')[0]
 
 
 function beforeFetchChanges() {
+
+    /* DON'T SEND SEARCH SUGGESTION */
+    clearactivenav()
     
     section1Container.setAttribute('style', 'display:unset;display: flex;flex-direction: column;justify-content: center; align-items: center;')
-
-    const linea = document.createElement("div")
-    linea.setAttribute('style', 'width:23.5vw; height:0.1px; opacity: 0.5; background-color: #9CAFC3;')
-    trendingTerms.appendChild(linea)
 
     /* CHANGE SEARCH TITLE  */
     trendingTerms.innerHTML = ""
     containerApiResult.innerHTML = ""
 
+    const linea = document.createElement("div")
+    linea.setAttribute('style', 'width:23.5vw; height:0.1px; opacity: 0.5; background-color: #9CAFC3;')
+    trendingTerms.appendChild(linea)
+    
     /*API REQUEST*/
     let userInput = gifosInput.value
     let giphyApiURL = `https://api.giphy.com/v1/gifs/search?q=${userInput}&rating=pg&api_key=${APIkey1}`
@@ -54,6 +63,7 @@ const gifCards = async (url) =>{
     Response = Responsejson.data
 
     printGif(Response) 
+
     vermas.addEventListener('click',seeMore)
 }
 
