@@ -4,6 +4,7 @@ gifosInput.addEventListener('keydown', enterValidator)
 
 function enterValidator(e) {
     if (e.key === 'Enter'){
+
         /* STOP SEARCH SUGGESTION */
         inputsug.removeEventListener('keyup', validateArrow)
         beforeFetchChanges()
@@ -11,7 +12,7 @@ function enterValidator(e) {
 }
 
 /* START SEARCH SUGGESTION AGAIN ON INPUT CLICK*/
-gifosInput.addEventListener('click', ()=> inputsug.addEventListener('keyup', validateArrow))
+gifosInput.addEventListener('keydown', ()=> inputsug.addEventListener('keyup', validateArrow))
 
 const lupaapi = document.getElementsByClassName('lupa')[0]
 lupaapi.addEventListener('click', beforeFetchChanges)
@@ -31,12 +32,7 @@ function beforeFetchChanges() {
     section1Container.setAttribute('style', 'display:unset;display: flex;flex-direction: column;justify-content: center; align-items: center;')
 
     /* CHANGE SEARCH TITLE  */
-    trendingTerms.innerHTML = ""
     containerApiResult.innerHTML = ""
-
-    const linea = document.createElement("div")
-    linea.setAttribute('style', 'width:23.5vw; height:0.1px; opacity: 0.5; background-color: #9CAFC3;')
-    trendingTerms.appendChild(linea)
     
     /*API REQUEST*/
     let userInput = gifosInput.value
@@ -62,6 +58,7 @@ const gifCards = async (url) =>{
     let Responsejson = await request.json()
     Response = Responsejson.data
 
+    trendingTerms.innerHTML = '<div style="width:23.5vw; height:0.1px; opacity: 0.5; background-color: #9CAFC3;"></div>'    
     printGif(Response) 
 
     vermas.addEventListener('click',seeMore)
@@ -82,5 +79,6 @@ const printGif = (json) => {
     }
     onHoverCard('miniSize')
     heartButton()
-    downloadcards()
+    downloadButton()
+    // maxButton()
 }

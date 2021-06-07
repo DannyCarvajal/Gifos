@@ -34,18 +34,18 @@ const heartButton = () => {
 
     for (let i = 0; i < heart.length; i++) {
 
-        if ( !heart[i].classList.contains("trash")){
-        /* HEART ICON ON HOVER */
-        iconchange(heart[i], 'mouseover', "Assets/icon-fav-hover.svg")
-        iconchange(heart[i], 'mouseout', "Assets/icon-fav.svg")
+        if (!heart[i].classList.contains("trash")) {
+            /* HEART ICON ON HOVER */
+            iconchange(heart[i], 'mouseover', "Assets/icon-fav-hover.svg")
+            iconchange(heart[i], 'mouseout', "Assets/icon-fav.svg")
 
-        /* STILL HOVER WHILE MOUSEOVER IN INNER HEART */
-        heartactive[i].addEventListener('mouseover', () => heart[i].src = "Assets/icon-fav-hover.svg")
-        heartactive[i].addEventListener('mouseout', () => heart[i].src = "Assets/icon-fav.svg")
+            /* STILL HOVER WHILE MOUSEOVER IN INNER HEART */
+            heartactive[i].addEventListener('mouseover', () => heart[i].src = "Assets/icon-fav-hover.svg")
+            heartactive[i].addEventListener('mouseout', () => heart[i].src = "Assets/icon-fav.svg")
 
-        /* SAVE LIKED HEART, USING THE ID OF THE HEART */
-        heart[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
-        heartactive[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
+            /* SAVE LIKED HEART, USING THE ID OF THE HEART */
+            heart[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
+            heartactive[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
         }
     }
 
@@ -59,35 +59,35 @@ const saveLikedHeart = (gifInfo) => {
     let gifElement = document.getElementsByClassName(saveGifInfo.id)[0]
 
     gifElement.classList.toggle("display")
-    gifStorage(saveGifInfo,favlist,'favorites')
+    gifStorage(saveGifInfo, favlist, 'favorites')
 }
 
 
 const trashButton = () => {
-    
+
     const trash = document.getElementsByClassName('trash')
     /* TRASH HOVER */
     for (let i = 0; i < trash.length; i++) {
         iconchange(trash[i], 'mouseover', "Assets/icon-trash-hover.svg");
         iconchange(trash[i], 'mouseout', "Assets/icon-trash-normal.svg");
 
-        trash[i].addEventListener('click',()=> {
+        trash[i].addEventListener('click', () => {
 
             let eraseElement = document.getElementsByClassName("favoritescard")[i]
             eraseElement.style.display = "none"
 
-            if ( document.body.id === "home"){
-                gifStorage(JSON.parse(trash[i].nextElementSibling.nextElementSibling.innerText),favlist,"favorites")
+            if (document.body.id === "home") {
+                gifStorage(JSON.parse(trash[i].nextElementSibling.nextElementSibling.innerText), favlist, "favorites")
             } else {
-                gifStorage(JSON.parse(trash[i].nextElementSibling.nextElementSibling.innerText),myGifList,"misgifos")
-                
+                gifStorage(JSON.parse(trash[i].nextElementSibling.nextElementSibling.innerText), myGifList, "misgifos")
+
             }
         })
     }
 
 }
 
-const downloadcards = () => {
+const downloadButton = () => {
 
     let download = document.getElementsByClassName(`card-interaction2`);
 
@@ -129,65 +129,54 @@ const max = document.getElementsByClassName(`card-interaction1`)
 
 const maxButton = () => {
 
-
     for (let i = 0; i < max.length; i++) {
-        iconchange(max[i], 'mouseover', "Assets/icon-max-hover.svg");
-        iconchange(max[i], 'mouseout', "Assets/icon-max-normal.svg");
 
-        max[i].addEventListener('click', () => {
+        iconchange(max[i], 'mouseover', "Assets/icon-max-hover.svg")
+        iconchange(max[i], 'mouseout', "Assets/icon-max-normal.svg")
 
+        max[i].addEventListener('click',() => {
 
-            let infoStorage = JSON.parse(max[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText)
-            let maxbackground = document.getElementsByClassName('maxbackground')[0]
-
-            const [titlefinal, userfinal] = titlecreator(infoStorage.title)
-
-            let card = `
-                <img class="returnButton" src="Assets/close.svg" alt="Return button">
-                <div style="position:fixed;" class= "gifMaxContainer">
-                    <img src="Assets/icon-download.svg"> 
-                    <img src="Assets/icon-fav.svg"> 
-                    <img src="Assets/icon-fav-active.svg"> 
-                    <p class="gifInfo" style="display:none;"> ${JSON.stringify(infoStorage)} </p>
-                    <div class="cardtitles"> 
-                        <h4>${userfinal}</h4>
-                        <p >${titlefinal}</p>
-                    </div>
-                </div>
-        `
-            // <img class="gifMaxImg" src="${infoStorage.images.downsized_medium.url}" alt="${titlefinal}"> 
-
-            document.body.innerHTML += card
-
-
-            /* BACKGROUND */
-            maxbackground.setAttribute('style', 'display:unset;')
             /* HIDE SCROLLBAR */
             document.documentElement.setAttribute('style', 'overflow-y:hidden;')
 
+            let infoStorage = JSON.parse(max[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText)
 
-            // /* STYLES IMG MAX */
-            let maxImg = document.getElementsByClassName('gifMaxImg')[0]
-            maxImg.setAttribute('style', `
-            position:fixed;
-            top:17%; 
-            left:27%;
-            width:695px; 
-            height: 385px;  
-            z-index:500;
-            `)
+            const [titlefinal, userfinal] = titlecreator(infoStorage.title)
+
+            let gifMaxMainContainer = document.createElement('div')
+            gifMaxMainContainer.className = "gifMaxContainer"
+            gifMaxMainContainer.style = `position: fixed; z-index: 900;
+            display:flex; justify-content:center; align-items:center;
+            inset:0 ; background-color: rgba(0, 0, 0, 0.5);`
+
+            let card = `
+                <div style="width:700px; height:80%; background-color:white; display:flex;justify-content:center; align-items:center; z-index:1000; position:relative; max-width:100vw; border-radius:10px;">
+                    <img class="returnButton" src="Assets/close.svg" alt="Return button" style="position:fixed; right:20px; top:20px; height:20px; width:20px; z-index:900;cursor:pointer;">
+                    <img class="card-interaction2" style="position:absolute; right:100px; bottom:65px; cursor:pointer;" src="Assets/icon-download.svg"> 
+                    <img class=" ${infoStorage.id}" style="display:none; position:absolute; right:146.5px; bottom:73px; transform: scale(0.9);" src="Assets/icon-fav-active.svg"> 
+                    <p class="gifInfo" style="display:none;"> ${JSON.stringify(infoStorage)} </p>
+                    <div class="cardtitles"> 
+                        <h4 style="position:absolute; left:100px; bottom:80px;">${userfinal}</h4>
+                        <p  style="position:absolute; left:100px; bottom:55px;">${titlefinal}</p>
+                    </div>
+                    <img class="gifMaxImg" src="${infoStorage.images.downsized_medium.url}" alt="${titlefinal}" style="width:unset; height:unset; max-height:62%; margin-bottom:7%; max-width:90% ; "> 
+                </div>
+        `
+            gifMaxMainContainer.innerHTML = card
+            document.body.appendChild(gifMaxMainContainer)
+
+            downloadButton()
 
             let returnMaxButton = document.getElementsByClassName('returnButton')[0]
-            returnMaxButton.setAttribute('style', `cursor:pointer;z-index: 500;width:20px; height:20px; position: fixed; top:20px; right:20px;`)
-
-            returnMaxButton.addEventListener('click', () => {
-
+            
+            const closeMax = () => {
                 document.body.removeChild(document.body.lastElementChild)
-                document.body.removeChild(document.body.lastElementChild)
-                maxbackground.setAttribute('style', 'display:none;')
                 document.documentElement.setAttribute('style', 'overflow-y:unset;')
-            })
+            }
+            
+            returnMaxButton.addEventListener('click', closeMax)
         })
 
     }
 }
+

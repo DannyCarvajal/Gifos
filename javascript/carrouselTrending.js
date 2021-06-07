@@ -33,8 +33,8 @@ const printGifCarrousel = (json) => {
     
     onHoverCard('bigSize')
     heartButton()
-    downloadcards()
-
+    downloadButton()
+    maxButton()
 }
 
 

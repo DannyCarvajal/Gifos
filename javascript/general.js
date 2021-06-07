@@ -1,5 +1,7 @@
 /* API KEYS */
-const APIkey1 = "aJ2dqTQO1FnTqFW200cIokXq4VwdVYTl"
+// const APIkey1 = "aJ2dqTQO1FnTqFW200cIokXq4VwdVYTl"
+const APIkey1 = "sy5TZIKLHt1Zm0hyBPoK3toaaoxK0hHT"
+
 
 function iconchange(name, method, src) {
     
