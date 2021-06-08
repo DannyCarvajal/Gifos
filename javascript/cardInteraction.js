@@ -27,31 +27,28 @@ const onHoverCard = (size) => {
 
 }
 
-let heart = document.getElementsByClassName(`card-interaction3`)
-let heartactive = document.getElementsByClassName(`card-interaction3-active`)
-const heartButton = () => {
+const heartButton = (gifIdClass) => {
 
-    for (let i = 0; i < heart.length; i++) {
+    let elementHeartActive = document.getElementsByClassName(gifIdClass)[0]
+    let elementHeart = elementHeartActive.previousElementSibling
 
-        if (!heart[i].classList.contains("trash")){
+    if (!elementHeart.classList.contains("trash")) {
 
-            /* HEART ICON ON HOVER */
-            iconchange(heart[i], 'mouseover', "Assets/icon-fav-hover.svg")
-            iconchange(heart[i], 'mouseout', "Assets/icon-fav.svg")
+        /* HEART ICON ON HOVER */
+        iconchange(elementHeart, 'mouseover', "Assets/icon-fav-hover.svg")
+        iconchange(elementHeart, 'mouseout', "Assets/icon-fav.svg")
 
-            /* STILL HOVER WHILE MOUSEOVER IN INNER HEART */
-            heartactive[i].addEventListener('mouseover', () => heart[i].src = "Assets/icon-fav-hover.svg")
-            heartactive[i].addEventListener('mouseout', () => heart[i].src = "Assets/icon-fav.svg")
+        /* STILL HOVER WHILE MOUSEOVER IN INNER HEART */
+        elementHeartActive.addEventListener('mouseover', () => elementHeart.src = "Assets/icon-fav-hover.svg")
+        elementHeartActive.addEventListener('mouseout', () => elementHeart.src = "Assets/icon-fav.svg")
 
-            /* SAVE LIKED HEART, USING THE ID OF THE HEART */
-            heart[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
-            heartactive[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
-        } else {
-            console.log(' la posición ' + i +' contenia trash en vez de heart')
-        }
+        /* SAVE LIKED HEART, USING THE ID OF THE HEART */
+        elementHeart.addEventListener("click", () => { saveLikedHeart(elementHeart.nextElementSibling.nextElementSibling.innerText) })
+        elementHeartActive.addEventListener("click", () => { saveLikedHeart(elementHeart.nextElementSibling.nextElementSibling.innerText) })
     }
 
-    /* LET'S SEE IF SOMEONE LIKED / DISLIKED YOU */
+
+    // /* LET'S SEE IF SOMEONE LIKED / DISLIKED YOU */
     gifHeartPressed()
 }
 
@@ -89,17 +86,16 @@ const trashButton = () => {
 
 }
 
-const downloadButton = () => {
+const downloadButton = (gifElementIdClass) => {
 
-    let download = document.getElementsByClassName(`card-interaction2`);
+    let elementId = document.getElementsByClassName(gifElementIdClass)[0]
+    let elementDownload = elementId.previousElementSibling.previousElementSibling
 
-    for (let i = 0; i < download.length; i++) {
-        /* CHANGE ICON ON HOVER */
-        iconchange(download[i], 'mouseover', "Assets/icon-download-hover.svg")
-        iconchange(download[i], 'mouseout', "Assets/icon-download.svg")
+    /* CHANGE ICON ON HOVER */
+    iconchange(elementDownload, 'mouseover', "Assets/icon-download-hover.svg")
+    iconchange(elementDownload, 'mouseout', "Assets/icon-download.svg")
 
-        download[i].addEventListener('click', () => downloadGif(download[i].nextElementSibling.nextElementSibling.nextElementSibling.innerText))
-    }
+    elementDownload.addEventListener('click', () => downloadGif(elementDownload.nextElementSibling.nextElementSibling.nextElementSibling.innerText))
 
 }
 
@@ -127,38 +123,31 @@ const downloadGif = async (gifInfo) => {
 }
 
 
+const maxButton = (gifElementIdClass) => {
 
-const maxButton = () => {
+    let elementId = document.getElementsByClassName(gifElementIdClass)[0]
+    let elementMax = elementId.previousElementSibling.previousElementSibling.previousElementSibling
 
-    let max = document.getElementsByClassName(`card-interaction1`)
+    iconchange(elementMax, 'mouseover', "Assets/icon-max-hover.svg")
+    iconchange(elementMax, 'mouseout', "Assets/icon-max-normal.svg")
 
-    for (let i = 0; i < max.length; i++) {
-
-        /* DON'T REPEAT EVENT LISTENERS */
-        if ( !max[i].classList.contains('maxActive')){
-
-            iconchange(max[i], 'mouseover', "Assets/icon-max-hover.svg")
-            iconchange(max[i], 'mouseout', "Assets/icon-max-normal.svg")
-            /* SET FLAG TO KNOW IF EVENT EXISTS*/
-            max[i].classList.add('maxActive')
-
-        max[i].addEventListener('click',() => {
+    elementMax.addEventListener('click', () => {
 
 
-            /* HIDE SCROLLBAR */
-            document.documentElement.setAttribute('style', 'overflow-y:hidden;')
+        /* HIDE SCROLLBAR */
+        document.documentElement.setAttribute('style', 'overflow-y:hidden;')
 
-            let infoStorage = JSON.parse(max[i].nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText)
+        let infoStorage = JSON.parse(elementMax.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.innerText)
 
-            const [titlefinal, userfinal] = titlecreator(infoStorage.title)
+        const [titlefinal, userfinal] = titlecreator(infoStorage.title)
 
-            let gifMaxMainContainer = document.createElement('div')
-            gifMaxMainContainer.className = "gifMaxContainer"
-            gifMaxMainContainer.style = `position: fixed; z-index: 900;
+        let gifMaxMainContainer = document.createElement('div')
+        gifMaxMainContainer.className = "gifMaxContainer"
+        gifMaxMainContainer.style = `position: fixed; z-index: 900;
             display:flex; justify-content:center; align-items:center;
             inset:0 ; background-color: rgba(0, 0, 0, 0.5);`
 
-            let card = `
+        let card = `
                 <div style="width:700px; height:80%; background-color:white; display:flex;justify-content:center; align-items:center; z-index:1000; position:relative; max-width:100vw; border-radius:10px;">
                     <img class="returnButton" src="Assets/close.svg" alt="Return button" style="position:fixed; right:20px; top:20px; height:20px; width:20px; z-index:900;cursor:pointer;">
                     <img class="card-interaction2" style="position:absolute; right:100px; bottom:65px; cursor:pointer;" src="Assets/icon-download.svg"> 
@@ -171,23 +160,19 @@ const maxButton = () => {
                     <img class="gifMaxImg" src="${infoStorage.images.downsized_medium.url}" alt="${titlefinal}" style="width:unset; height:unset; max-height:62%; margin-bottom:7%; max-width:90% ; "> 
                 </div>
         `
-            gifMaxMainContainer.innerHTML = card
-            document.body.appendChild(gifMaxMainContainer)
+        gifMaxMainContainer.innerHTML = card
+        document.body.appendChild(gifMaxMainContainer)
 
-            downloadButton()
+        downloadButton(infoStorage.id)
 
-            let returnMaxButton = document.getElementsByClassName('returnButton')[0]
-            
-            const closeMax = () => {
-                document.body.removeChild(document.body.lastElementChild)
-                document.documentElement.setAttribute('style', 'overflow-y:unset;')
-            }
-            
-            returnMaxButton.addEventListener('click', closeMax)
-        })
-        } else {
-            console.log(' la posición ' + i +' ya tenia max')
+        let returnMaxButton = document.getElementsByClassName('returnButton')[0]
+
+        const closeMax = () => {
+            document.body.removeChild(document.body.lastElementChild)
+            document.documentElement.setAttribute('style', 'overflow-y:unset;')
         }
-    }
+
+        returnMaxButton.addEventListener('click', closeMax)
+    })
 }
 

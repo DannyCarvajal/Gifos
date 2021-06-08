@@ -76,9 +76,11 @@ const printGif = (json) => {
             const cardModel = createCardModel(json[i],"tarjetaAPI", "response")
             containerApiResult.innerHTML += cardModel
         }
+        for (let i = 0 + tarjetaAPICount; i < tarjetaAPICount + 12; i++) {
+            heartButton(json[i].id)
+            downloadButton(json[i].id)
+            maxButton(json[i].id)
+        }
     }
     onHoverCard('miniSize')
-    heartButton()
-    downloadButton()
-    // maxButton()
 }

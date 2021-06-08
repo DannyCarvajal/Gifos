@@ -30,11 +30,14 @@ const printGifCarrousel = (json) => {
         const cardModel = createCardModel(Gifelement,"tarjeta", "card-trending" )
         container.innerHTML += cardModel
     })
+
+    json.forEach(Gifelement => {
+        heartButton(Gifelement.id)
+        downloadButton(Gifelement.id)
+        maxButton(Gifelement.id)
+    })
     
     onHoverCard('bigSize')
-    heartButton()
-    downloadButton()
-    // maxButton()
 }
 
 
