@@ -27,10 +27,9 @@ const onHoverCard = (size) => {
 
 }
 
+let heart = document.getElementsByClassName(`card-interaction3`)
+let heartactive = document.getElementsByClassName(`card-interaction3-active`)
 const heartButton = () => {
-
-    let heart = document.getElementsByClassName(`card-interaction3`)
-    let heartactive = document.getElementsByClassName(`card-interaction3-active`)
 
     for (let i = 0; i < heart.length; i++) {
 
@@ -79,7 +78,7 @@ const trashButton = () => {
             let eraseElement = document.getElementsByClassName("favoritescard")[i]
             eraseElement.style.display = "none"
 
-            if (document.body.id === "favoritos") {
+            if (document.body.id === "favoritos" || document.body.id === "home") {
                 gifStorage(JSON.parse(trash[i].nextElementSibling.nextElementSibling.innerText), favlist, "favorites")
             } else {
                 gifStorage(JSON.parse(trash[i].nextElementSibling.nextElementSibling.innerText), myGifList, "misgifos")

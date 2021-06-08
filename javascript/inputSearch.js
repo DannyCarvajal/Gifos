@@ -80,5 +80,5 @@ const printGif = (json) => {
     onHoverCard('miniSize')
     heartButton()
     downloadButton()
-    maxButton()
+    // maxButton()
 }
