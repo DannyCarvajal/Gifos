@@ -76,7 +76,8 @@ const printGif = (json) => {
             const cardModel = createCardModel(json[i],"tarjetaAPI", "response")
             containerApiResult.innerHTML += cardModel
         }
-        for (let i = 0 + tarjetaAPICount; i < tarjetaAPICount + 12; i++) {
+        for (let i = 0; i < tarjetaAPICount + 12; i++) {
+            console.log(json[i].id)
             heartButton(json[i].id)
             downloadButton(json[i].id)
             maxButton(json[i].id)

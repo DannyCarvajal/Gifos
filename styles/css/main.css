@@ -376,6 +376,19 @@ nav > ul > li > a > img.creatugifo:hover {
   display: block;
 }
 
+.card-max-active {
+  position: absolute;
+  right: 142.9px;
+  bottom: 71px;
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  display: none;
+}
+
+.card-max-active.display {
+  display: inline-block;
+}
+
 .seccion2-main {
   background-color: var(--bgseccion2);
   display: -webkit-box;
