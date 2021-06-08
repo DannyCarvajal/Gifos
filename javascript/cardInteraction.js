@@ -151,7 +151,7 @@ const maxPrint = (elementId, elementMax) => {
 
         let card = `
                 <div style="width:700px; height:80%; background-color:white; display:flex;justify-content:center; align-items:center; z-index:1000; position:relative; max-width:100vw; border-radius:10px;">
-                    <img class="returnButton" src="Assets/close.svg" alt="Return button" style="position:fixed; right:20px; top:20px; height:20px; width:20px; z-index:900;cursor:pointer;">
+                    <img class="returnButton" src="Assets/closewhite.svg" alt="Return button" style="position:fixed; right:20px; top:20px; height:20px; width:20px; z-index:900;cursor:pointer;">
                     <img class="card-interaction2" style="position:absolute; right:100px; bottom:65px; cursor:pointer;" src="Assets/icon-download.svg"> 
                     <img src="Assets/icon-fav.svg" style="position:absolute; right:136.5px; bottom:64px;"> 
 

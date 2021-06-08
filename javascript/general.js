@@ -1,5 +1,5 @@
 /* API KEYS */
-const APIkey1 = "RZxFZ5TrGvf5QPK1F08feuyx3V7pqSpY"
+var APIkey1 = "RZxFZ5TrGvf5QPK1F08feuyx3V7pqSp"
 // NOT SAVED INTO AN .ENV AS LONG AS I WANT THE PROJECT RUNNING ON GIT
 
 function iconchange(name, method, src) {
@@ -55,3 +55,5 @@ var myGifList
     }
 
 }()
+
+APIkey1+='Y'
