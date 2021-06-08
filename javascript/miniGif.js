@@ -31,6 +31,7 @@ const printMiniTrashGif = (gifList,containername) => {
         
     onHoverCard('miniSize')
     trashButton()
+    maxButton()
 }
 
 

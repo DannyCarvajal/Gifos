@@ -27,14 +27,15 @@ const onHoverCard = (size) => {
 
 }
 
-const heart = document.getElementsByClassName(`card-interaction3`)
-const heartactive = document.getElementsByClassName(`card-interaction3-active`)
-
 const heartButton = () => {
+
+    let heart = document.getElementsByClassName(`card-interaction3`)
+    let heartactive = document.getElementsByClassName(`card-interaction3-active`)
 
     for (let i = 0; i < heart.length; i++) {
 
-        if (!heart[i].classList.contains("trash")) {
+        if (!heart[i].classList.contains("trash")){
+
             /* HEART ICON ON HOVER */
             iconchange(heart[i], 'mouseover', "Assets/icon-fav-hover.svg")
             iconchange(heart[i], 'mouseout', "Assets/icon-fav.svg")
@@ -46,6 +47,8 @@ const heartButton = () => {
             /* SAVE LIKED HEART, USING THE ID OF THE HEART */
             heart[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
             heartactive[i].addEventListener("click", () => { saveLikedHeart(heart[i].nextElementSibling.nextElementSibling.innerText) })
+        } else {
+            console.log(' la posición ' + i +' contenia trash en vez de heart')
         }
     }
 
@@ -59,7 +62,7 @@ const saveLikedHeart = (gifInfo) => {
     let gifElement = document.getElementsByClassName(saveGifInfo.id)[0]
 
     gifElement.classList.toggle("display")
-    gifStorage(saveGifInfo, favlist, 'favorites')
+    gifStorage(saveGifInfo, favlist, "favorites")
 }
 
 
@@ -76,7 +79,7 @@ const trashButton = () => {
             let eraseElement = document.getElementsByClassName("favoritescard")[i]
             eraseElement.style.display = "none"
 
-            if (document.body.id === "home") {
+            if (document.body.id === "favoritos") {
                 gifStorage(JSON.parse(trash[i].nextElementSibling.nextElementSibling.innerText), favlist, "favorites")
             } else {
                 gifStorage(JSON.parse(trash[i].nextElementSibling.nextElementSibling.innerText), myGifList, "misgifos")
@@ -125,16 +128,23 @@ const downloadGif = async (gifInfo) => {
 }
 
 
-const max = document.getElementsByClassName(`card-interaction1`)
 
 const maxButton = () => {
 
+    let max = document.getElementsByClassName(`card-interaction1`)
+
     for (let i = 0; i < max.length; i++) {
 
-        iconchange(max[i], 'mouseover', "Assets/icon-max-hover.svg")
-        iconchange(max[i], 'mouseout', "Assets/icon-max-normal.svg")
+        /* DON'T REPEAT EVENT LISTENERS */
+        if ( !max[i].classList.contains('maxActive')){
+
+            iconchange(max[i], 'mouseover', "Assets/icon-max-hover.svg")
+            iconchange(max[i], 'mouseout', "Assets/icon-max-normal.svg")
+            /* SET FLAG TO KNOW IF EVENT EXISTS*/
+            max[i].classList.add('maxActive')
 
         max[i].addEventListener('click',() => {
+
 
             /* HIDE SCROLLBAR */
             document.documentElement.setAttribute('style', 'overflow-y:hidden;')
@@ -176,7 +186,9 @@ const maxButton = () => {
             
             returnMaxButton.addEventListener('click', closeMax)
         })
-
+        } else {
+            console.log(' la posición ' + i +' ya tenia max')
+        }
     }
 }
 
