@@ -49,7 +49,6 @@ const gifHeartPressed = () => {
 
         if ( gifCard !== undefined && !gifCard.classList.contains('display')){
             gifCard.classList.toggle('display')
-            console.log(' I pressed your heart '+i)
         }
     }
 

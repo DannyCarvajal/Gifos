@@ -15,7 +15,7 @@ const printMiniTrashGif = (gifList,containername) => {
                         <img class="card card-interaction1" src="Assets/icon-max-normal.svg"> 
                         <img class="card card-interaction2" src="Assets/icon-download.svg"> 
                         <img class="card card-interaction3 trash" src="Assets/icon-trash-normal.svg"> 
-                        <img class="card card-interaction3-active" src="Assets/icon-fav-active.svg" style="display:none;"> 
+                        <img class="card card-interaction3-active ${gifList[i].id}trash" src="Assets/icon-fav-active.svg" style="display:none;"> 
                         <p class="gifInfo" style="display:none;"> ${JSON.stringify(gifList[i])} </p>
                         <div class="cardtitles"> 
                             <h4>${userfinal}</h4>
@@ -32,8 +32,9 @@ const printMiniTrashGif = (gifList,containername) => {
     onHoverCard('miniSize')
     trashButton()
 
-    for (const item in gifList){
-        maxButton(item.id)
+    for (const item of gifList){
+        maxButton(item.id+'trash')
+        downloadButton(item.id+'trash')
     }
 }
 

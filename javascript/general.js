@@ -1,7 +1,6 @@
 /* API KEYS */
-// const APIkey1 = "aJ2dqTQO1FnTqFW200cIokXq4VwdVYTl"
-const APIkey1 = "sy5TZIKLHt1Zm0hyBPoK3toaaoxK0hHT"
-
+const APIkey1 = "RZxFZ5TrGvf5QPK1F08feuyx3V7pqSpY"
+// NOT SAVED INTO AN .ENV AS LONG AS I WANT THE PROJECT RUNNING ON GIT
 
 function iconchange(name, method, src) {
     

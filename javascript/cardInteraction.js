@@ -131,8 +131,10 @@ const maxButton = (gifElementIdClass) => {
     iconchange(elementMax, 'mouseover', "Assets/icon-max-hover.svg")
     iconchange(elementMax, 'mouseout', "Assets/icon-max-normal.svg")
 
-    elementMax.addEventListener('click', () => {
+    elementMax.addEventListener('click', () => maxPrint(elementId,elementMax))
+}
 
+const maxPrint = (elementId, elementMax) => {
 
         /* HIDE SCROLLBAR */
         document.documentElement.setAttribute('style', 'overflow-y:hidden;')
@@ -151,7 +153,9 @@ const maxButton = (gifElementIdClass) => {
                 <div style="width:700px; height:80%; background-color:white; display:flex;justify-content:center; align-items:center; z-index:1000; position:relative; max-width:100vw; border-radius:10px;">
                     <img class="returnButton" src="Assets/close.svg" alt="Return button" style="position:fixed; right:20px; top:20px; height:20px; width:20px; z-index:900;cursor:pointer;">
                     <img class="card-interaction2" style="position:absolute; right:100px; bottom:65px; cursor:pointer;" src="Assets/icon-download.svg"> 
-                    <img class=" ${infoStorage.id}" style="display:none; position:absolute; right:146.5px; bottom:73px; transform: scale(0.9);" src="Assets/icon-fav-active.svg"> 
+                    <img src="Assets/icon-fav.svg" style="position:absolute; right:136.5px; bottom:64px;"> 
+
+                    <img class="card-max-active ${infoStorage.id}max" style="" src="Assets/icon-fav-active.svg"> 
                     <p class="gifInfo" style="display:none;"> ${JSON.stringify(infoStorage)} </p>
                     <div class="cardtitles"> 
                         <h4 style="position:absolute; left:100px; bottom:80px;">${userfinal}</h4>
@@ -163,8 +167,27 @@ const maxButton = (gifElementIdClass) => {
         gifMaxMainContainer.innerHTML = card
         document.body.appendChild(gifMaxMainContainer)
 
-        downloadButton(infoStorage.id)
+        downloadButton(infoStorage.id+'max')
+        heartButton(infoStorage.id+'max')
 
+        // HEART INTERACTION
+        let heartInteractionMax = document.getElementsByClassName(infoStorage.id+'max')[0]
+        const displayHeart = () => {heartInteractionMax.classList.toggle('display')}
+
+        if ( elementId.classList.contains('display'))
+            displayHeart()
+
+        // IF TRASH USER CAN'T DISLIKE INSIDE MAX
+        if ( elementId.previousElementSibling.classList.contains('trash')){
+            heartInteractionMax.style.display ="none"
+            heartInteractionMax.previousElementSibling.style.display ="none"
+        }
+        
+        heartInteractionMax.previousElementSibling.addEventListener('click',displayHeart)
+        heartInteractionMax.addEventListener('click',displayHeart)
+
+
+        // RETURN ON X CLICK
         let returnMaxButton = document.getElementsByClassName('returnButton')[0]
 
         const closeMax = () => {
@@ -173,6 +196,5 @@ const maxButton = (gifElementIdClass) => {
         }
 
         returnMaxButton.addEventListener('click', closeMax)
-    })
+    
 }
-

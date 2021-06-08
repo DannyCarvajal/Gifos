@@ -106,5 +106,16 @@
         display: block;
     }
 
-    
+}
+
+.card-max-active{
+    position:absolute;
+    right: 142.9px;
+    bottom:71px;
+    transform: scale(0.9);
+    display:none; 
+
+    &.display{
+        display: inline-block;
+    }
 }
