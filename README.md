@@ -1,7 +1,3 @@
-
-# GIFOS PROJECT 
-
-
 # GIFOS PROJECT  
 
 [![Logo giphy](https://variety.com/wp-content/uploads/2016/10/giphy-logo-e1477932075273.png?w=867 "Logo giphy")](https://variety.com/wp-content/uploads/2016/10/giphy-logo-e1477932075273.png?w=867 "Logo giphy")
