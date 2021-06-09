@@ -8,10 +8,10 @@ templatenav.innerHTML = `<nav>
 
 <ul>
     <li class="titulo nav-items item1">MODO NOCTURNO</li>
-    <li class="titulo nav-items"><a class="titulo item2" href="favoritos.html">FAVORITOS</a></li>
-    <li class="titulo nav-items"><a class="titulo item3" href="misgifos.html">MIS GIFOS</a></li>
+    <li class="titulo nav-items"><a class="titulo item2" href="./favoritos.html">FAVORITOS</a></li>
+    <li class="titulo nav-items"><a class="titulo item3" href="./misgifos.html">MIS GIFOS</a></li>
     <li>
-        <a class="item4" href="creatugifo.html">
+        <a class="item4" href="./creatugifo.html">
             <img src="Assets/button-crear-gifo.svg" alt="Simbolo de añadir Gifo" class="nav-items creatugifo ">
         </a>
     </li>

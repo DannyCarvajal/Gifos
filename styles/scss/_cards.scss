@@ -108,6 +108,16 @@
 
 }
 
+.card-max{
+    position:absolute;
+    right:19.5%;
+    bottom:64px;
+
+    &.nondisplay{
+        display: none;
+    }
+}
+
 .card-max-active{
     position:absolute;
     right: 20.415%;

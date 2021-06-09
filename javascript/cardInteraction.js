@@ -149,31 +149,13 @@ const maxPrint = (elementId, elementMax) => {
             display:flex; justify-content:center; align-items:center;
             inset:0 ; background-color: rgba(0, 0, 0, 0.5);`
 
-        // let card = `
-        //         <div style="width:700px; height:80%; background-color:white; display:flex;justify-content:center; align-items:center; z-index:1000; position:relative; max-width:100vw; border-radius:10px;">
-        //             <img class="returnButton" src="Assets/closewhite.svg" alt="Return button" style="position:fixed; right:20px; top:20px; height:20px; width:20px; z-index:900;cursor:pointer;">
-
-        //             <img class="card-interaction2" style="position:absolute; right:100px; bottom:65px; cursor:pointer;" src="Assets/icon-download.svg"> 
-
-        //             <img src="Assets/icon-fav.svg" style="position:absolute; right:136.5px; bottom:64px;"> 
-
-        //             <img class="card-max-active ${infoStorage.id}max" style="" src="Assets/icon-fav-active.svg"> 
-        //             <p class="gifInfo" style="display:none;"> ${JSON.stringify(infoStorage)} </p>
-        //             <div class="cardtitles"> 
-        //                 <h4 style="position:absolute; left:100px; bottom:80px;">${userfinal}</h4>
-        //                 <p  style="position:absolute; left:100px; bottom:55px;">${titlefinal}</p>
-        //             </div>
-        //             <img class="gifMaxImg" src="${infoStorage.images.downsized_medium.url}" alt="${titlefinal}" style="width:unset; height:unset; max-height:62%; margin-bottom:7%; max-width:90% ; "> 
-        //         </div>
-        // `
-
         let card = `
                 <div style="width:700px; height:80%; background-color:white; display:flex;justify-content:center; align-items:center; z-index:1000; position:relative; max-width:100vw; border-radius:10px;">
                     <img class="returnButton" src="Assets/closewhite.svg" alt="Return button" style="position:fixed; right:20px; top:20px; height:20px; width:20px; z-index:900;cursor:pointer;">
 
                     <img class="card-interaction2" style="position:absolute; right:12%; bottom:65px; cursor:pointer;" src="Assets/icon-download.svg"> 
                     
-                    <img src="Assets/icon-fav.svg" style="position:absolute; right:19.5%; bottom:64px;"> 
+                    <img class="card-max" src="Assets/icon-fav.svg" style=""> 
 
                     <img class="card-max-active ${infoStorage.id}max" style="" src="Assets/icon-fav-active.svg"> 
                     <p class="gifInfo" style="display:none;"> ${JSON.stringify(infoStorage)} </p>
@@ -192,7 +174,11 @@ const maxPrint = (elementId, elementMax) => {
 
         // HEART INTERACTION
         let heartInteractionMax = document.getElementsByClassName(infoStorage.id+'max')[0]
-        const displayHeart = () => {heartInteractionMax.classList.toggle('display')}
+        const displayHeart = () => {
+            heartInteractionMax.classList.toggle('display')
+            heartInteractionMax.previousElementSibling.classList.toggle('nondisplay')
+        }
+
 
         if ( elementId.classList.contains('display'))
             displayHeart()
